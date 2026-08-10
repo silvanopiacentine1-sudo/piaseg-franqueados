@@ -280,6 +280,20 @@ def restore_backup(name: str):
     return {"restored": name}
 
 
+@app.post("/admin/reseed")
+def reseed():
+    """Força releitura do franqueados.json versionado no repositório,
+    sobrescrevendo os dados atuais em DATA_DIR (com backup de segurança
+    antes). Uso raro: só quando o disco persistente ficou com dados
+    desatualizados/divergentes do que está no código.
+    """
+    if not _BUNDLED_FRANQUEADOS_FILE.exists():
+        raise HTTPException(status_code=500, detail="Arquivo de seed não encontrado")
+    _run_startup_backup()
+    shutil.copy2(_BUNDLED_FRANQUEADOS_FILE, FRANQUEADOS_FILE)
+    return {"reseeded": True, "total": len(load_franqueados())}
+
+
 @app.get("/health")
 def health():
     return {"status": "ok"}
