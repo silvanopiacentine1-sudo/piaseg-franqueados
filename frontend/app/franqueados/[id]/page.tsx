@@ -1,18 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Header from "../../components/Header";
 import FranqueadoForm from "../../components/FranqueadoForm";
 import { apiJson } from "../../lib/api";
 import { Franqueado, FranqueadoInput } from "../../lib/types";
 
-export default function FranqueadoDetalhePage() {
+function FranqueadoDetalheContent() {
   const router = useRouter();
   const params = useParams<{ id: string }>();
+  const searchParams = useSearchParams();
+  const criado = searchParams.get("criado") === "1";
   const [franqueado, setFranqueado] = useState<Franqueado | null>(null);
   const [error, setError] = useState("");
   const [deleting, setDeleting] = useState(false);
+  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
     apiJson<Franqueado>(`/franqueados/${params.id}`)
@@ -26,6 +29,8 @@ export default function FranqueadoDetalhePage() {
       body: JSON.stringify(data),
     });
     setFranqueado(updated);
+    setSaved(true);
+    setTimeout(() => setSaved(false), 4000);
   }
 
   async function handleDelete() {
@@ -67,11 +72,26 @@ export default function FranqueadoDetalhePage() {
         </div>
 
         {error && <p className="text-red-600 text-sm mb-3">{error}</p>}
+        {(saved || criado) && (
+          <div className="mb-4 rounded-md bg-green-50 border border-green-300 text-green-800 text-sm px-3 py-2">
+            {criado
+              ? "✓ Franqueado cadastrado e atualizado em todo o sistema (listagem, mapa e por cidade)."
+              : "✓ Alterações salvas e atualizadas em todo o sistema (listagem, mapa e por cidade)."}
+          </div>
+        )}
 
         {franqueado && (
           <FranqueadoForm initial={franqueado} onSubmit={handleSubmit} submitLabel="Salvar Alterações" />
         )}
       </main>
     </div>
+  );
+}
+
+export default function FranqueadoDetalhePage() {
+  return (
+    <Suspense>
+      <FranqueadoDetalheContent />
+    </Suspense>
   );
 }

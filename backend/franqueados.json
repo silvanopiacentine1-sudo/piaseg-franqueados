@@ -22,7 +22,8 @@
     "inicio_operacao": "29/07/2021",
     "fim_operacao": "",
     "cpf_franqueado": "",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "2",
@@ -47,7 +48,11 @@
     "inicio_operacao": "29/10/2024",
     "fim_operacao": "",
     "cpf_franqueado": "6",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": [
+      "E-mail",
+      "Sistema Financeiro"
+    ]
   },
   {
     "id": "3",
@@ -72,7 +77,8 @@
     "inicio_operacao": "05/12/2024",
     "fim_operacao": "",
     "cpf_franqueado": "2510895176",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "4",
@@ -97,7 +103,8 @@
     "inicio_operacao": "31/08/2023",
     "fim_operacao": "",
     "cpf_franqueado": "29208165",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "5",
@@ -122,7 +129,8 @@
     "inicio_operacao": "02/10/2024",
     "fim_operacao": "",
     "cpf_franqueado": "119198096",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "6",
@@ -147,7 +155,8 @@
     "inicio_operacao": "08/10/2024",
     "fim_operacao": "",
     "cpf_franqueado": "33165153809",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "7",
@@ -172,7 +181,8 @@
     "inicio_operacao": "10/08/2023",
     "fim_operacao": "",
     "cpf_franqueado": "36581535800",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "8",
@@ -197,7 +207,8 @@
     "inicio_operacao": "30/09/2024",
     "fim_operacao": "",
     "cpf_franqueado": "12588194737",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "9",
@@ -222,7 +233,8 @@
     "inicio_operacao": "10/09/2021",
     "fim_operacao": "",
     "cpf_franqueado": "2513809122",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "10",
@@ -247,7 +259,8 @@
     "inicio_operacao": "24/03/2025",
     "fim_operacao": "",
     "cpf_franqueado": "9",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "11",
@@ -272,7 +285,8 @@
     "inicio_operacao": "18/06/2024",
     "fim_operacao": "",
     "cpf_franqueado": "70787530115",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "12",
@@ -297,7 +311,8 @@
     "inicio_operacao": "17/06/2025",
     "fim_operacao": "",
     "cpf_franqueado": "1782634193",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "13",
@@ -322,7 +337,8 @@
     "inicio_operacao": "04/04/2024",
     "fim_operacao": "",
     "cpf_franqueado": "3549269188",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "14",
@@ -347,7 +363,8 @@
     "inicio_operacao": "17/04/2024",
     "fim_operacao": "",
     "cpf_franqueado": "98588052172",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "15",
@@ -372,7 +389,8 @@
     "inicio_operacao": "08/12/2025",
     "fim_operacao": "",
     "cpf_franqueado": "8",
-    "status": "inativo"
+    "status": "inativo",
+    "sistemas_contratados": []
   },
   {
     "id": "16",
@@ -397,7 +415,8 @@
     "inicio_operacao": "30/10/2024",
     "fim_operacao": "",
     "cpf_franqueado": "12729844864",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "17",
@@ -422,7 +441,8 @@
     "inicio_operacao": "01/07/2024",
     "fim_operacao": "",
     "cpf_franqueado": "89006968153",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "18",
@@ -447,7 +467,8 @@
     "inicio_operacao": "02/06/2025",
     "fim_operacao": "",
     "cpf_franqueado": "1896793959",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "19",
@@ -472,7 +493,8 @@
     "inicio_operacao": "22/09/2021",
     "fim_operacao": "",
     "cpf_franqueado": "3",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "20",
@@ -497,7 +519,8 @@
     "inicio_operacao": "17/02/2025",
     "fim_operacao": "",
     "cpf_franqueado": "58472860663",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "21",
@@ -522,7 +545,8 @@
     "inicio_operacao": "25/02/2025",
     "fim_operacao": "",
     "cpf_franqueado": "4",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "22",
@@ -547,7 +571,8 @@
     "inicio_operacao": "24/02/2022",
     "fim_operacao": "",
     "cpf_franqueado": "542177170",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "23",
@@ -572,7 +597,8 @@
     "inicio_operacao": "03/08/2021",
     "fim_operacao": "",
     "cpf_franqueado": "33629412904",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "24",
@@ -597,7 +623,8 @@
     "inicio_operacao": "21/06/2021",
     "fim_operacao": "",
     "cpf_franqueado": "1422026140",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "25",
@@ -622,7 +649,8 @@
     "inicio_operacao": "30/10/2025",
     "fim_operacao": "12/01/2026",
     "cpf_franqueado": "2",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "26",
@@ -647,7 +675,8 @@
     "inicio_operacao": "01/09/2025",
     "fim_operacao": "",
     "cpf_franqueado": "4416599188",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "27",
@@ -672,7 +701,8 @@
     "inicio_operacao": "23/08/2023",
     "fim_operacao": "",
     "cpf_franqueado": "7",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "28",
@@ -697,7 +727,8 @@
     "inicio_operacao": "",
     "fim_operacao": "",
     "cpf_franqueado": "",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "29",
@@ -722,7 +753,8 @@
     "inicio_operacao": "26/01/2026",
     "fim_operacao": "",
     "cpf_franqueado": "613982762",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "30",
@@ -747,7 +779,8 @@
     "inicio_operacao": "09/02/2026",
     "fim_operacao": "",
     "cpf_franqueado": "852677081",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "31",
@@ -772,7 +805,8 @@
     "inicio_operacao": "21/05/2026",
     "fim_operacao": "",
     "cpf_franqueado": "4513263504",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "32",
@@ -797,7 +831,8 @@
     "inicio_operacao": "08/06/2026",
     "fim_operacao": "",
     "cpf_franqueado": "6407042984",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   },
   {
     "id": "33",
@@ -822,6 +857,7 @@
     "inicio_operacao": "03/07/2026",
     "fim_operacao": "",
     "cpf_franqueado": "",
-    "status": "ativo"
+    "status": "ativo",
+    "sistemas_contratados": []
   }
 ]

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FranqueadoInput, MODALIDADES, UF_LIST } from "../lib/types";
+import { FranqueadoInput, MODALIDADES, SISTEMAS, UF_LIST } from "../lib/types";
 
 function Field({
   label,
@@ -67,6 +67,16 @@ export default function FranqueadoForm({
 
   function removeContato(index: number) {
     set("contatos", data.contatos.filter((_, i) => i !== index));
+  }
+
+  function toggleSistema(sistema: string) {
+    const has = data.sistemas_contratados.includes(sistema);
+    set(
+      "sistemas_contratados",
+      has
+        ? data.sistemas_contratados.filter((s) => s !== sistema)
+        : [...data.sistemas_contratados, sistema]
+    );
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -198,6 +208,23 @@ export default function FranqueadoForm({
         <Field label="Início da Operação" value={data.inicio_operacao} onChange={(v) => set("inicio_operacao", v)} />
         <Field label="Fim da Operação" value={data.fim_operacao} onChange={(v) => set("fim_operacao", v)} />
       </Section>
+
+      <div className="bg-white rounded-lg border border-black/10 p-5">
+        <h2 className="font-heading text-base mb-4" style={{ color: "#072a3c" }}>Sistemas Contratados</h2>
+        <div className="flex flex-wrap gap-4">
+          {SISTEMAS.map((s) => (
+            <label key={s} className="flex items-center gap-2 text-sm cursor-pointer">
+              <input
+                type="checkbox"
+                checked={data.sistemas_contratados.includes(s)}
+                onChange={() => toggleSistema(s)}
+                className="w-4 h-4 accent-[#072a3c]"
+              />
+              {s}
+            </label>
+          ))}
+        </div>
+      </div>
 
       {error && <p className="text-red-600 text-sm">{error}</p>}
 

@@ -22,6 +22,7 @@ export interface Franqueado {
   fim_operacao: string;
   cpf_franqueado: string;
   status: string;
+  sistemas_contratados: string[];
 }
 
 export type FranqueadoInput = Omit<Franqueado, "id">;
@@ -43,9 +44,12 @@ export const FRANQUEADO_VAZIO: FranqueadoInput = {
   fim_operacao: "",
   cpf_franqueado: "",
   status: "ativo",
+  sistemas_contratados: [],
 };
 
 export const MODALIDADES = ["H.O", "Store", "Migração", "Corporate"];
+
+export const SISTEMAS = ["E-mail", "Contador", "Sistema Financeiro"];
 
 export const UF_LIST = [
   "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS",

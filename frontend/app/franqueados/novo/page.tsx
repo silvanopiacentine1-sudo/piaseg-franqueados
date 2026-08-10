@@ -14,7 +14,7 @@ export default function NovoFranqueadoPage() {
       method: "POST",
       body: JSON.stringify(data),
     });
-    router.push(`/franqueados/${created.id}`);
+    router.push(`/franqueados/${created.id}?criado=1`);
   }
 
   return (

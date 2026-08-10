@@ -45,10 +45,13 @@ MAX_BACKUPS = 30
 
 MODALIDADES = ["H.O", "Store", "Migração", "Corporate"]
 
+SISTEMAS = ["E-mail", "Contador", "Sistema Financeiro"]
+
 FIELDS = [
     "nome_fantasia", "razao_social", "cnpj", "cep", "uf", "municipio",
     "bairro", "logradouro", "numero", "complemento", "modalidade",
     "inicio_operacao", "fim_operacao", "cpf_franqueado", "status",
+    "sistemas_contratados",
 ]
 
 EXPORT_HEADERS = {
@@ -58,6 +61,7 @@ EXPORT_HEADERS = {
     "numero": "Número", "complemento": "Complemento", "modalidade": "Modalidade",
     "inicio_operacao": "Início da Operação", "fim_operacao": "Fim da Operação",
     "cpf_franqueado": "CPF do Franqueado", "status": "Status",
+    "sistemas_contratados": "Sistemas Contratados",
 }
 
 
@@ -120,6 +124,7 @@ class FranqueadoIn(BaseModel):
     fim_operacao: str = ""
     cpf_franqueado: str = ""
     status: str = "ativo"
+    sistemas_contratados: list[str] = []
 
 
 @app.get("/franqueados")
@@ -189,7 +194,7 @@ def stats_municipio():
         }
         for (uf, municipio), group in grouped.items()
     ]
-    return sorted(result, key=lambda x: (x["uf"], x["municipio"]))
+    return sorted(result, key=lambda x: x["municipio"].lower())
 
 
 @app.get("/franqueados/export")
@@ -206,7 +211,10 @@ def export_franqueados():
             f"{c.get('nome') or 'Contato'}: {c.get('telefone') or ''} {c.get('email') or ''}".strip()
             for c in f.get("contatos") or []
         )
-        row = [f.get(k, "") for k in keys[:6]] + [contatos_str] + [f.get(k, "") for k in keys[6:]]
+        def cell_value(k):
+            v = f.get(k, "")
+            return ", ".join(v) if isinstance(v, list) else v
+        row = [cell_value(k) for k in keys[:6]] + [contatos_str] + [cell_value(k) for k in keys[6:]]
         ws.append(row)
     buffer = io.BytesIO()
     wb.save(buffer)

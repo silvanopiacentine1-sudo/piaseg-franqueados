@@ -138,6 +138,7 @@ export default function FranqueadosPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-black/10 text-left text-black/60">
+                  <th className="px-4 py-3 font-medium">Nº</th>
                   <th className="px-4 py-3 font-medium">Nome</th>
                   <th className="px-4 py-3 font-medium">CNPJ</th>
                   <th className="px-4 py-3 font-medium">E-mail</th>
@@ -146,7 +147,7 @@ export default function FranqueadosPage() {
                 </tr>
               </thead>
               <tbody>
-                {items.map((f) => {
+                {items.map((f, index) => {
                   const contato = primeiroContato(f);
                   return (
                     <tr
@@ -154,6 +155,7 @@ export default function FranqueadosPage() {
                       onClick={() => router.push(`/franqueados/${f.id}`)}
                       className="border-b border-black/5 last:border-0 hover:bg-[#f6f6f6] cursor-pointer"
                     >
+                      <td className="px-4 py-3 text-black/50">{index + 1}</td>
                       <td className="px-4 py-3 font-medium">{f.nome_fantasia || "—"}</td>
                       <td className="px-4 py-3">{f.cnpj || "—"}</td>
                       <td className="px-4 py-3">{contato?.email || "—"}</td>
@@ -175,7 +177,7 @@ export default function FranqueadosPage() {
                 })}
                 {items.length === 0 && (
                   <tr>
-                    <td colSpan={5} className="px-4 py-8 text-center text-black/50">
+                    <td colSpan={6} className="px-4 py-8 text-center text-black/50">
                       Nenhum franqueado encontrado.
                     </td>
                   </tr>
