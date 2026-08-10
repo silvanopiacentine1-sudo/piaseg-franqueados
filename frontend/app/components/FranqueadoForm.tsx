@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FranqueadoInput, MODALIDADES, TIPOS_CONTATO, UF_LIST } from "../lib/types";
+import { FranqueadoInput, MODALIDADES, UF_LIST } from "../lib/types";
 
 function Field({
   label,
@@ -57,10 +57,10 @@ export default function FranqueadoForm({
   }
 
   function addContato() {
-    set("contatos", [...data.contatos, { tipo: "E-mail", valor: "" }]);
+    set("contatos", [...data.contatos, { nome: "", telefone: "", email: "" }]);
   }
 
-  function updateContato(index: number, field: "tipo" | "valor", value: string) {
+  function updateContato(index: number, field: "nome" | "telefone" | "email", value: string) {
     const next = data.contatos.map((c, i) => (i === index ? { ...c, [field]: value } : c));
     set("contatos", next);
   }
@@ -127,36 +127,43 @@ export default function FranqueadoForm({
             + Contato
           </button>
         </div>
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-4">
           {data.contatos.map((c, i) => (
-            <div key={i} className="flex gap-3 items-end">
-              <div className="w-40">
-                <label className="block text-xs font-medium mb-1 text-black/60">Tipo</label>
-                <select
-                  value={c.tipo}
-                  onChange={(e) => updateContato(i, "tipo", e.target.value)}
-                  className="w-full rounded-md border border-black/20 px-3 py-2 text-sm outline-none focus:border-[#c2a360]"
-                >
-                  {TIPOS_CONTATO.map((t) => (
-                    <option key={t} value={t}>{t}</option>
-                  ))}
-                </select>
-              </div>
-              <div className="flex-1">
-                <label className="block text-xs font-medium mb-1 text-black/60">Valor</label>
+            <div key={i} className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end border border-black/10 rounded-md p-3">
+              <div>
+                <label className="block text-xs font-medium mb-1 text-black/60">Nome</label>
                 <input
-                  value={c.valor}
-                  onChange={(e) => updateContato(i, "valor", e.target.value)}
+                  value={c.nome}
+                  onChange={(e) => updateContato(i, "nome", e.target.value)}
                   className="w-full rounded-md border border-black/20 px-3 py-2 text-sm outline-none focus:border-[#c2a360]"
                 />
               </div>
-              <button
-                type="button"
-                onClick={() => removeContato(i)}
-                className="text-red-600 hover:underline text-sm px-2 py-2"
-              >
-                Remover
-              </button>
+              <div>
+                <label className="block text-xs font-medium mb-1 text-black/60">Telefone</label>
+                <input
+                  value={c.telefone}
+                  onChange={(e) => updateContato(i, "telefone", e.target.value)}
+                  className="w-full rounded-md border border-black/20 px-3 py-2 text-sm outline-none focus:border-[#c2a360]"
+                />
+              </div>
+              <div className="flex gap-3 items-end">
+                <div className="flex-1">
+                  <label className="block text-xs font-medium mb-1 text-black/60">E-mail</label>
+                  <input
+                    type="email"
+                    value={c.email}
+                    onChange={(e) => updateContato(i, "email", e.target.value)}
+                    className="w-full rounded-md border border-black/20 px-3 py-2 text-sm outline-none focus:border-[#c2a360]"
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={() => removeContato(i)}
+                  className="text-red-600 hover:underline text-sm px-2 py-2"
+                >
+                  Remover
+                </button>
+              </div>
             </div>
           ))}
           {data.contatos.length === 0 && (

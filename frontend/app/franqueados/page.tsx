@@ -55,9 +55,8 @@ export default function FranqueadosPage() {
     }
   }
 
-  function contatoResumo(f: Franqueado): string {
-    if (!f.contatos || f.contatos.length === 0) return "—";
-    return f.contatos.map((c) => c.valor).filter(Boolean).join(", ");
+  function primeiroContato(f: Franqueado) {
+    return f.contatos && f.contatos.length > 0 ? f.contatos[0] : null;
   }
 
   return (
@@ -139,45 +138,44 @@ export default function FranqueadosPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-black/10 text-left text-black/60">
-                  <th className="px-4 py-3 font-medium">Nº</th>
-                  <th className="px-4 py-3 font-medium">Nome Fantasia</th>
+                  <th className="px-4 py-3 font-medium">Nome</th>
                   <th className="px-4 py-3 font-medium">CNPJ</th>
-                  <th className="px-4 py-3 font-medium">Cidade/UF</th>
-                  <th className="px-4 py-3 font-medium">Contato</th>
-                  <th className="px-4 py-3 font-medium">Modalidade</th>
+                  <th className="px-4 py-3 font-medium">E-mail</th>
+                  <th className="px-4 py-3 font-medium">Telefone</th>
                   <th className="px-4 py-3 font-medium">Status</th>
                 </tr>
               </thead>
               <tbody>
-                {items.map((f) => (
-                  <tr
-                    key={f.id}
-                    onClick={() => router.push(`/franqueados/${f.id}`)}
-                    className="border-b border-black/5 last:border-0 hover:bg-[#f6f6f6] cursor-pointer"
-                  >
-                    <td className="px-4 py-3 text-black/50">{f.id}</td>
-                    <td className="px-4 py-3 font-medium">{f.nome_fantasia || "—"}</td>
-                    <td className="px-4 py-3">{f.cnpj || "—"}</td>
-                    <td className="px-4 py-3">{f.municipio ? `${f.municipio}/${f.uf}` : "—"}</td>
-                    <td className="px-4 py-3">{contatoResumo(f)}</td>
-                    <td className="px-4 py-3">{f.modalidade || "—"}</td>
-                    <td className="px-4 py-3">
-                      <span
-                        className="inline-block px-2 py-0.5 rounded-full text-xs font-semibold"
-                        style={
-                          f.status === "ativo"
-                            ? { background: "#e6f4ea", color: "#1e7e34" }
-                            : { background: "#fde8e8", color: "#c0392b" }
-                        }
-                      >
-                        {f.status === "ativo" ? "Ativo" : "Inativo"}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
+                {items.map((f) => {
+                  const contato = primeiroContato(f);
+                  return (
+                    <tr
+                      key={f.id}
+                      onClick={() => router.push(`/franqueados/${f.id}`)}
+                      className="border-b border-black/5 last:border-0 hover:bg-[#f6f6f6] cursor-pointer"
+                    >
+                      <td className="px-4 py-3 font-medium">{f.nome_fantasia || "—"}</td>
+                      <td className="px-4 py-3">{f.cnpj || "—"}</td>
+                      <td className="px-4 py-3">{contato?.email || "—"}</td>
+                      <td className="px-4 py-3">{contato?.telefone || "—"}</td>
+                      <td className="px-4 py-3">
+                        <span
+                          className="inline-block px-2 py-0.5 rounded-full text-xs font-semibold"
+                          style={
+                            f.status === "ativo"
+                              ? { background: "#e6f4ea", color: "#1e7e34" }
+                              : { background: "#fde8e8", color: "#c0392b" }
+                          }
+                        >
+                          {f.status === "ativo" ? "Ativo" : "Inativo"}
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })}
                 {items.length === 0 && (
                   <tr>
-                    <td colSpan={7} className="px-4 py-8 text-center text-black/50">
+                    <td colSpan={5} className="px-4 py-8 text-center text-black/50">
                       Nenhum franqueado encontrado.
                     </td>
                   </tr>

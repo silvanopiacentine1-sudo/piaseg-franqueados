@@ -1,17 +1,14 @@
 [
   {
-    "id": "71",
+    "id": "1",
     "nome_fantasia": "RAFAEL ALENCAR E SILVA & CIA LTDA",
     "razao_social": "ALENCAR VEICULOS",
     "cnpj": "29163697000101",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "rafael_alencar_@hotmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "65999225486"
+        "nome": "",
+        "telefone": "65999225486",
+        "email": "rafael_alencar_@hotmail.com"
       }
     ],
     "cep": "78300001",
@@ -28,18 +25,15 @@
     "status": "ativo"
   },
   {
-    "id": "72",
+    "id": "2",
     "nome_fantasia": "ALEXANDRE SILVA AMORIM",
     "razao_social": "AMORIM SEG CONSULTORIA E ASSITENCIA DE SEGUROS",
     "cnpj": "58029105000153",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "alexandre.amorim@piaseg.com.br"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "67996640879"
+        "nome": "",
+        "telefone": "67996640879",
+        "email": "alexandre.amorim@piaseg.com.br"
       }
     ],
     "cep": "79821026",
@@ -56,22 +50,15 @@
     "status": "ativo"
   },
   {
-    "id": "74",
+    "id": "3",
     "nome_fantasia": "BRUNO LOURENCO GIROTTO",
     "razao_social": "GIROTTO ENGENHARIA LTDA",
     "cnpj": "25128058000146",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "brunolgirotto@agenergia.com.br"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "67999953356"
-      },
-      {
-        "tipo": "Telefone",
-        "valor": "6734230045"
+        "nome": "",
+        "telefone": "67999953356",
+        "email": "brunolgirotto@agenergia.com.br"
       }
     ],
     "cep": "79800024",
@@ -88,18 +75,15 @@
     "status": "ativo"
   },
   {
-    "id": "75",
+    "id": "4",
     "nome_fantasia": "BRUNO HENRIQUE NOIA ARRUDA",
     "razao_social": "ARRUDA & OURIQUES LTDA",
     "cnpj": "35780100000162",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "energiasolar.sistema.escritorio@gmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "67981369297"
+        "nome": "",
+        "telefone": "67981369297",
+        "email": "energiasolar.sistema.escritorio@gmail.com"
       }
     ],
     "cep": "79833605",
@@ -116,18 +100,15 @@
     "status": "ativo"
   },
   {
-    "id": "76",
+    "id": "5",
     "nome_fantasia": "VANESSA FAVERI DEMAMANN",
     "razao_social": "CAMBARA ADMINISTRADORA DE SEGUROS LTDA",
     "cnpj": "57307895000129",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "cambarasegurosenegocios@gmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "67999879424"
+        "nome": "",
+        "telefone": "67999879424",
+        "email": "cambarasegurosenegocios@gmail.com"
       }
     ],
     "cep": "79290000",
@@ -144,18 +125,15 @@
     "status": "ativo"
   },
   {
-    "id": "77",
+    "id": "6",
     "nome_fantasia": "CELSO CARLOS CAVALLIERI JUNIOR",
     "razao_social": "CELSO CARLOS CAVALLIERI JUNIOR",
     "cnpj": "99999999999999",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "celsocarloscavallierijunior@gmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "14996073202"
+        "nome": "",
+        "telefone": "14996073202",
+        "email": "celsocarloscavallierijunior@gmail.com"
       }
     ],
     "cep": "17258252",
@@ -172,18 +150,15 @@
     "status": "ativo"
   },
   {
-    "id": "78",
+    "id": "7",
     "nome_fantasia": "DIOGO FELIPE BONFIM",
     "razao_social": "VALE REPRESENTAÇÕES E INVESTIMENTOS LTDA",
     "cnpj": "51340706000133",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "diogobonfim@gmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "12996834385"
+        "nome": "",
+        "telefone": "12996834385",
+        "email": "diogobonfim@gmail.com"
       }
     ],
     "cep": "03015010",
@@ -200,18 +175,15 @@
     "status": "ativo"
   },
   {
-    "id": "79",
+    "id": "8",
     "nome_fantasia": "FABIANA TEIXEIRA REZENDE",
     "razao_social": "F & C SEGUROS LTDA",
     "cnpj": "56426173000120",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "fabianaseg2024@gmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "24998365821"
+        "nome": "",
+        "telefone": "24998365821",
+        "email": "fabianaseg2024@gmail.com"
       }
     ],
     "cep": "27516240",
@@ -228,18 +200,15 @@
     "status": "ativo"
   },
   {
-    "id": "80",
+    "id": "9",
     "nome_fantasia": "CYNTHIA FRUTUOSO CERQUEIRA RODRIGUES AMORIM",
     "razao_social": "FRUTUOSO & AMORIM LTDA",
     "cnpj": "24078133000149",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "piasegsegurostocantins@gmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "63984128048"
+        "nome": "",
+        "telefone": "63984128048",
+        "email": "piasegsegurostocantins@gmail.com"
       }
     ],
     "cep": "77022492",
@@ -256,18 +225,15 @@
     "status": "ativo"
   },
   {
-    "id": "81",
+    "id": "10",
     "nome_fantasia": "ILSON GOMES DA SILVA",
     "razao_social": "IGS SEG CORRETORA LTDA",
     "cnpj": "32215748000106",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "ilsongomesh@hotmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "27999270264"
+        "nome": "",
+        "telefone": "27999270264",
+        "email": "ilsongomesh@hotmail.com"
       }
     ],
     "cep": "29105390",
@@ -284,18 +250,15 @@
     "status": "ativo"
   },
   {
-    "id": "82",
+    "id": "11",
     "nome_fantasia": "CAROLINA DE SOUZA MORALES MEDEIROS",
     "razao_social": "TERRA ASSESSORIA IMOBILIÁRIA LTDA",
     "cnpj": "10586504000199",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "carolinamorales_02@hotmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "67992400792"
+        "nome": "",
+        "telefone": "67992400792",
+        "email": "carolinamorales_02@hotmail.com"
       }
     ],
     "cep": "79804030",
@@ -312,18 +275,15 @@
     "status": "ativo"
   },
   {
-    "id": "83",
+    "id": "12",
     "nome_fantasia": "JIMMY CRISTIANE ALEGRE",
     "razao_social": "JIMMY CRISTIAN ALEGRE  LIMITADA",
     "cnpj": "35031243000171",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "jimmydourados@gmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "67996634866"
+        "nome": "",
+        "telefone": "67996634866",
+        "email": "jimmydourados@gmail.com"
       }
     ],
     "cep": "79800025",
@@ -340,18 +300,15 @@
     "status": "ativo"
   },
   {
-    "id": "84",
+    "id": "13",
     "nome_fantasia": "JOAO ANTONIO BOEIRA",
     "razao_social": "JOÃO ANTONIO PEREIRA BOEIRA LTDA",
     "cnpj": "54565952000181",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "joaoa.boeira@hotmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "67999545363"
+        "nome": "",
+        "telefone": "67999545363",
+        "email": "joaoa.boeira@hotmail.com"
       }
     ],
     "cep": "79920027",
@@ -368,18 +325,15 @@
     "status": "ativo"
   },
   {
-    "id": "85",
+    "id": "14",
     "nome_fantasia": "JULIANO ROCHA BRAGA",
     "razao_social": "INFINITY SEG PRESTADORA DE SERVICOS LTDA",
     "cnpj": "54678815000153",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "infinitysegg@hotmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "67999962851"
+        "nome": "",
+        "telefone": "67999962851",
+        "email": "infinitysegg@hotmail.com"
       }
     ],
     "cep": "79824060",
@@ -396,18 +350,15 @@
     "status": "ativo"
   },
   {
-    "id": "86",
+    "id": "15",
     "nome_fantasia": "LINDOMAR ANTONIO PERUSSATTO",
     "razao_social": "FORTEZ SOLUÇÕES FINANCEIRAS LTDA",
     "cnpj": "64591709000191",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "fortezsolucoesfinanceiras@gmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "45999204153"
+        "nome": "",
+        "telefone": "45999204153",
+        "email": "fortezsolucoesfinanceiras@gmail.com"
       }
     ],
     "cep": "85819710",
@@ -424,18 +375,15 @@
     "status": "inativo"
   },
   {
-    "id": "87",
+    "id": "16",
     "nome_fantasia": "LUCAS MUN WUON JIKAL",
     "razao_social": "JKL NEGOCIOS IMOBILIARIOS LTDA",
     "cnpj": "05763978000129",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "lucasjikal777@gmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "11973334301"
+        "nome": "",
+        "telefone": "11973334301",
+        "email": "lucasjikal777@gmail.com"
       }
     ],
     "cep": "01123050",
@@ -452,18 +400,15 @@
     "status": "ativo"
   },
   {
-    "id": "88",
+    "id": "17",
     "nome_fantasia": "MARLI CANDIDA DE OLIVEIRA",
     "razao_social": "MARVSEG",
     "cnpj": "55813637000199",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "marvsegquiri@hotmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "64981244240"
+        "nome": "",
+        "telefone": "64981244240",
+        "email": "marvsegquiri@hotmail.com"
       }
     ],
     "cep": "75862124",
@@ -480,18 +425,15 @@
     "status": "ativo"
   },
   {
-    "id": "89",
+    "id": "18",
     "nome_fantasia": "MAURICIO DE SA PARDINHO",
     "razao_social": "MSDP APOIO ADMINISTRATIVO",
     "cnpj": "53120238000117",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "mauriciocg@piaseg.com.br"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "67998351583"
+        "nome": "",
+        "telefone": "67998351583",
+        "email": "mauriciocg@piaseg.com.br"
       }
     ],
     "cep": "79823732",
@@ -508,18 +450,15 @@
     "status": "ativo"
   },
   {
-    "id": "90",
+    "id": "19",
     "nome_fantasia": "FERNANDO SILVA",
     "razao_social": "FERNANDO SILVA DA COSTA FILHO LTDA",
     "cnpj": "65353513000121",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "fernandoscfilho2008@gmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "67998134070"
+        "nome": "",
+        "telefone": "67998134070",
+        "email": "fernandoscfilho2008@gmail.com"
       }
     ],
     "cep": "79011190",
@@ -536,18 +475,15 @@
     "status": "ativo"
   },
   {
-    "id": "91",
+    "id": "20",
     "nome_fantasia": "RENATA PIRES AMOROSO LIMA",
     "razao_social": "TAURI SEGUROS",
     "cnpj": "33858014000108",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "renata.amoroso@piaseg.com.br"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "31984968023"
+        "nome": "",
+        "telefone": "31984968023",
+        "email": "renata.amoroso@piaseg.com.br"
       }
     ],
     "cep": "30330360",
@@ -564,18 +500,15 @@
     "status": "ativo"
   },
   {
-    "id": "92",
+    "id": "21",
     "nome_fantasia": "ROQUE HOSANO DOS SANTOS CRUZ",
     "razao_social": "RC SERVIÇOS ESPECIALIZADOS  LTDA",
     "cnpj": "60055748000113",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "souvencer50@gmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "61986526372"
+        "nome": "",
+        "telefone": "61986526372",
+        "email": "souvencer50@gmail.com"
       }
     ],
     "cep": "70765100",
@@ -592,18 +525,15 @@
     "status": "ativo"
   },
   {
-    "id": "93",
+    "id": "22",
     "nome_fantasia": "SCHEILA CRISTINA MARCOS REINISCH",
     "razao_social": "MANO MOTORS",
     "cnpj": "34285827000100",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "scheilacreinisch@gmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "67996839558"
+        "nome": "",
+        "telefone": "67996839558",
+        "email": "scheilacreinisch@gmail.com"
       }
     ],
     "cep": "79841090",
@@ -620,18 +550,15 @@
     "status": "ativo"
   },
   {
-    "id": "94",
+    "id": "23",
     "nome_fantasia": "SEGMAIOR SEGUROS LTDA",
     "razao_social": "SEGMAIOR SEGUROS LTDA",
     "cnpj": "42843794000103",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "gestaoveiculos@rodomaior.com.br"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "67996685508"
+        "nome": "",
+        "telefone": "67996685508",
+        "email": "gestaoveiculos@rodomaior.com.br"
       }
     ],
     "cep": "79046200",
@@ -648,18 +575,15 @@
     "status": "ativo"
   },
   {
-    "id": "95",
+    "id": "24",
     "nome_fantasia": "THIAGO DE MORAES AGUILERA",
     "razao_social": "TMA CONSULTORIA E ASSISTENCIA DE SEGUROS LTDA",
     "cnpj": "42353968000141",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "thiago@piaseg.com.br"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "67999120609"
+        "nome": "",
+        "telefone": "67999120609",
+        "email": "thiago@piaseg.com.br"
       }
     ],
     "cep": "79011535",
@@ -676,22 +600,15 @@
     "status": "ativo"
   },
   {
-    "id": "96",
+    "id": "25",
     "nome_fantasia": "RAFAEL BON RIBEIRO",
     "razao_social": "LPRR LOGISTICA & TRANSPORTE LTDA",
     "cnpj": "61067546000154",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "contato@piasegcampinas.com.br"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "11988464025"
-      },
-      {
-        "tipo": "Telefone",
-        "valor": "1192979464"
+        "nome": "",
+        "telefone": "11988464025",
+        "email": "contato@piasegcampinas.com.br"
       }
     ],
     "cep": "13070033",
@@ -708,18 +625,15 @@
     "status": "ativo"
   },
   {
-    "id": "97",
+    "id": "26",
     "nome_fantasia": "DAYWID WILLIAM DOS SANTOS TEODORO",
     "razao_social": "DAYWID",
     "cnpj": "99999999999999",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "daywid.wst@hotmail.com"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "67999039554"
+        "nome": "",
+        "telefone": "67999039554",
+        "email": "daywid.wst@hotmail.com"
       }
     ],
     "cep": "79890000",
@@ -736,18 +650,15 @@
     "status": "ativo"
   },
   {
-    "id": "98",
+    "id": "27",
     "nome_fantasia": "LEANDRO LIMA DE ALENCAR",
     "razao_social": "LEANDRO LIMA",
     "cnpj": "51326830000144",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "leandrol.alencar@gmail.com"
-      },
-      {
-        "tipo": "Telefone",
-        "valor": "6799720727"
+        "nome": "",
+        "telefone": "6799720727",
+        "email": "leandrol.alencar@gmail.com"
       }
     ],
     "cep": "79813270",
@@ -764,14 +675,15 @@
     "status": "ativo"
   },
   {
-    "id": "99",
+    "id": "28",
     "nome_fantasia": "TREINAMENTO",
     "razao_social": "PIASEG - PIASEG",
     "cnpj": "99999999999999",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "sueli.pereira@piaseg.com.br"
+        "nome": "",
+        "telefone": "",
+        "email": "sueli.pereira@piaseg.com.br"
       }
     ],
     "cep": "79825090",
@@ -788,18 +700,15 @@
     "status": "ativo"
   },
   {
-    "id": "101",
+    "id": "29",
     "nome_fantasia": "SONIMAR MACHADO",
     "razao_social": "PRIMICIAS SEGUROS FLORIPA LTDA",
     "cnpj": "65424048000172",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "sonimarmachado@gmail.com.br"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "48999728275"
+        "nome": "",
+        "telefone": "48999728275",
+        "email": "sonimarmachado@gmail.com.br"
       }
     ],
     "cep": "88049326",
@@ -816,22 +725,15 @@
     "status": "ativo"
   },
   {
-    "id": "102",
+    "id": "30",
     "nome_fantasia": "ELIARA RODRIGUES FLORES DA COSTA",
     "razao_social": "ELIARA RODRIGUES FLORES DA COSTA LTDA",
     "cnpj": "34005106000108",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "eliara.rodrigues@piaseg.com.br"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "54996161748"
-      },
-      {
-        "tipo": "Telefone",
-        "valor": "5499616174"
+        "nome": "",
+        "telefone": "54996161748",
+        "email": "eliara.rodrigues@piaseg.com.br"
       }
     ],
     "cep": "99360000",
@@ -848,18 +750,15 @@
     "status": "ativo"
   },
   {
-    "id": "103",
+    "id": "31",
     "nome_fantasia": "RICARDO MACEDO PORTELA",
     "razao_social": "RICARDO MACEDO PORTELA",
     "cnpj": "99999999999999",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "ricardo.portela@piaseg.com.br"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "67999202952"
+        "nome": "",
+        "telefone": "67999202952",
+        "email": "ricardo.portela@piaseg.com.br"
       }
     ],
     "cep": "79902698",
@@ -876,18 +775,15 @@
     "status": "ativo"
   },
   {
-    "id": "104",
+    "id": "32",
     "nome_fantasia": "CLAUDIA TATIANE DE MOURA",
     "razao_social": "CLAUDIA TATIANE DE MOURA",
     "cnpj": "99999999999999",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "claudia.moura@piaseg.com.br"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "42999810258"
+        "nome": "",
+        "telefone": "42999810258",
+        "email": "claudia.moura@piaseg.com.br"
       }
     ],
     "cep": "84010320",
@@ -904,18 +800,15 @@
     "status": "ativo"
   },
   {
-    "id": "105",
+    "id": "33",
     "nome_fantasia": "JULIO CESAR SARTORELLI",
     "razao_social": "JULIO CESAR SARTORELLI",
     "cnpj": "99999999999999",
     "contatos": [
       {
-        "tipo": "E-mail",
-        "valor": "julio.sartorelli@piaseg.com.br"
-      },
-      {
-        "tipo": "Celular",
-        "valor": "41998517845"
+        "nome": "",
+        "telefone": "41998517845",
+        "email": "julio.sartorelli@piaseg.com.br"
       }
     ],
     "cep": "81220010",

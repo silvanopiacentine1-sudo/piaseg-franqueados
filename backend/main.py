@@ -98,8 +98,9 @@ def save_franqueados(items: list[dict]) -> None:
 
 
 class Contato(BaseModel):
-    tipo: str = "E-mail"
-    valor: str = ""
+    nome: str = ""
+    telefone: str = ""
+    email: str = ""
 
 
 class FranqueadoIn(BaseModel):
@@ -142,7 +143,11 @@ def list_franqueados(
             if needle in (f.get("municipio") or "").lower():
                 return True
             for c in f.get("contatos") or []:
-                if needle in (c.get("valor") or "").lower():
+                if needle in (c.get("nome") or "").lower():
+                    return True
+                if needle in (c.get("telefone") or "").lower():
+                    return True
+                if needle in (c.get("email") or "").lower():
                     return True
             return False
         items = [f for f in items if matches(f)]
@@ -197,7 +202,10 @@ def export_franqueados():
     headers = [EXPORT_HEADERS.get(k, k) for k in keys[:6]] + ["Contatos"] + [EXPORT_HEADERS.get(k, k) for k in keys[6:]]
     ws.append(headers)
     for f in items:
-        contatos_str = "; ".join(f"{c.get('tipo')}: {c.get('valor')}" for c in f.get("contatos") or [])
+        contatos_str = "; ".join(
+            f"{c.get('nome') or 'Contato'}: {c.get('telefone') or ''} {c.get('email') or ''}".strip()
+            for c in f.get("contatos") or []
+        )
         row = [f.get(k, "") for k in keys[:6]] + [contatos_str] + [f.get(k, "") for k in keys[6:]]
         ws.append(row)
     buffer = io.BytesIO()

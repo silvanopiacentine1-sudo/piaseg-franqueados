@@ -1,6 +1,7 @@
 export interface Contato {
-  tipo: string;
-  valor: string;
+  nome: string;
+  telefone: string;
+  email: string;
 }
 
 export interface Franqueado {
@@ -45,8 +46,6 @@ export const FRANQUEADO_VAZIO: FranqueadoInput = {
 };
 
 export const MODALIDADES = ["H.O", "Store", "Migração", "Corporate"];
-
-export const TIPOS_CONTATO = ["E-mail", "Telefone", "Celular", "WhatsApp"];
 
 export const UF_LIST = [
   "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS",
