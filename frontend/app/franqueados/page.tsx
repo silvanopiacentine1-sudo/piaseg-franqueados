@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Header from "../components/Header";
 import { apiJson, downloadFile } from "../lib/api";
-import { getToken } from "../lib/auth";
 import { Franqueado, UF_LIST } from "../lib/types";
 
 export default function FranqueadosPage() {
@@ -19,10 +18,6 @@ export default function FranqueadosPage() {
   const [exporting, setExporting] = useState(false);
 
   useEffect(() => {
-    if (!getToken()) {
-      router.replace("/");
-      return;
-    }
     load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -60,6 +55,11 @@ export default function FranqueadosPage() {
     }
   }
 
+  function contatoResumo(f: Franqueado): string {
+    if (!f.contatos || f.contatos.length === 0) return "—";
+    return f.contatos.map((c) => c.valor).filter(Boolean).join(", ");
+  }
+
   return (
     <div className="min-h-full flex flex-col">
       <Header />
@@ -88,7 +88,7 @@ export default function FranqueadosPage() {
 
         <form onSubmit={handleFilterSubmit} className="bg-white rounded-lg border border-black/10 p-4 mb-4 flex flex-wrap gap-3 items-end">
           <div className="flex-1 min-w-[200px]">
-            <label className="block text-xs font-medium mb-1 text-black/60">Buscar (nome, razão social, CNPJ, email, cidade)</label>
+            <label className="block text-xs font-medium mb-1 text-black/60">Buscar (nome, razão social, CNPJ, contato, cidade)</label>
             <input
               value={q}
               onChange={(e) => setQ(e.target.value)}
@@ -139,11 +139,12 @@ export default function FranqueadosPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-black/10 text-left text-black/60">
+                  <th className="px-4 py-3 font-medium">Nº</th>
                   <th className="px-4 py-3 font-medium">Nome Fantasia</th>
                   <th className="px-4 py-3 font-medium">CNPJ</th>
                   <th className="px-4 py-3 font-medium">Cidade/UF</th>
                   <th className="px-4 py-3 font-medium">Contato</th>
-                  <th className="px-4 py-3 font-medium">Tipo</th>
+                  <th className="px-4 py-3 font-medium">Modalidade</th>
                   <th className="px-4 py-3 font-medium">Status</th>
                 </tr>
               </thead>
@@ -154,11 +155,12 @@ export default function FranqueadosPage() {
                     onClick={() => router.push(`/franqueados/${f.id}`)}
                     className="border-b border-black/5 last:border-0 hover:bg-[#f6f6f6] cursor-pointer"
                   >
+                    <td className="px-4 py-3 text-black/50">{f.id}</td>
                     <td className="px-4 py-3 font-medium">{f.nome_fantasia || "—"}</td>
                     <td className="px-4 py-3">{f.cnpj || "—"}</td>
                     <td className="px-4 py-3">{f.municipio ? `${f.municipio}/${f.uf}` : "—"}</td>
-                    <td className="px-4 py-3">{f.email || f.celular || f.telefone || "—"}</td>
-                    <td className="px-4 py-3">{f.tipo || "—"}</td>
+                    <td className="px-4 py-3">{contatoResumo(f)}</td>
+                    <td className="px-4 py-3">{f.modalidade || "—"}</td>
                     <td className="px-4 py-3">
                       <span
                         className="inline-block px-2 py-0.5 rounded-full text-xs font-semibold"
@@ -175,7 +177,7 @@ export default function FranqueadosPage() {
                 ))}
                 {items.length === 0 && (
                   <tr>
-                    <td colSpan={6} className="px-4 py-8 text-center text-black/50">
+                    <td colSpan={7} className="px-4 py-8 text-center text-black/50">
                       Nenhum franqueado encontrado.
                     </td>
                   </tr>

@@ -1,12 +1,7 @@
-import { getToken, logout } from "./auth";
-
 export const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 export async function apiFetch(path: string, options: RequestInit = {}): Promise<Response> {
-  const token = getToken();
-  const headers = new Headers(options.headers);
-  if (token) headers.set("Authorization", `Bearer ${token}`);
-  return fetch(`${API}${path}`, { ...options, headers });
+  return fetch(`${API}${path}`, options);
 }
 
 export async function apiJson<T>(path: string, options: RequestInit = {}): Promise<T> {
@@ -16,10 +11,6 @@ export async function apiJson<T>(path: string, options: RequestInit = {}): Promi
   }
   const res = await apiFetch(path, { ...options, headers });
   if (!res.ok) {
-    if (res.status === 401) {
-      logout();
-      if (typeof window !== "undefined") window.location.href = "/?sessao_expirada=1";
-    }
     const data = await res.json().catch(() => ({}));
     throw new Error(data.detail ?? `Erro ${res.status}`);
   }

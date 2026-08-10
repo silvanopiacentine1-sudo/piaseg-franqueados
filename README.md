@@ -1,19 +1,19 @@
 # Piaseg Franqueados
 
-Portal interno de cadastro e consulta das unidades franqueadas Piaseg.
+Portal interno de cadastro e consulta das unidades franqueadas Piaseg. Sem área logada — acesso direto.
 
-- **Backend**: FastAPI + JWT, dados em JSON (`backend/franqueados.json`, `backend/users.json`)
+- **Backend**: FastAPI, dados em JSON (`backend/franqueados.json`)
 - **Frontend**: Next.js (App Router) + Tailwind CSS
 
 ## Funcionalidades
 
-- Login para equipe interna (JWT, 60 dias)
-- Cadastro, edição e exclusão de franqueados
-- Busca e filtros (nome, razão social, CNPJ, email, UF, status)
+- Cadastro, edição e exclusão de franqueados, com número de sequência gerado automaticamente
+- Contatos dinâmicos (adicionar quantos quiser, cada um com tipo e valor)
+- Modalidades: H.O, Store, Migração, Corporate
+- Busca e filtros (nome, razão social, CNPJ, contato, UF, status)
 - Exportação para Excel
 - Mapa de franqueados por estado
 - Relação de franqueados por cidade
-- Gestão de usuários internos do portal
 - Backup automático a cada deploy (últimos 30 snapshots) + restauração
 
 ## Desenvolvimento local

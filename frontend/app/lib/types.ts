@@ -1,11 +1,14 @@
+export interface Contato {
+  tipo: string;
+  valor: string;
+}
+
 export interface Franqueado {
   id: string;
   nome_fantasia: string;
   razao_social: string;
   cnpj: string;
-  email: string;
-  telefone: string;
-  celular: string;
+  contatos: Contato[];
   cep: string;
   uf: string;
   municipio: string;
@@ -13,20 +16,9 @@ export interface Franqueado {
   logradouro: string;
   numero: string;
   complemento: string;
-  latitude: string;
-  longitude: string;
-  ie: string;
-  natureza_juridica: string;
-  capital_social: string;
-  inaugurada: string;
-  grupos: string;
-  data_inicio_implantacao: string;
-  data_fim_implantacao: string;
-  data_inauguracao: string;
-  data_criacao: string;
-  data_criacao_sistema: string;
-  data_inativacao: string;
-  tipo: string;
+  modalidade: string;
+  inicio_operacao: string;
+  fim_operacao: string;
   cpf_franqueado: string;
   status: string;
 }
@@ -37,9 +29,7 @@ export const FRANQUEADO_VAZIO: FranqueadoInput = {
   nome_fantasia: "",
   razao_social: "",
   cnpj: "",
-  email: "",
-  telefone: "",
-  celular: "",
+  contatos: [],
   cep: "",
   uf: "",
   municipio: "",
@@ -47,23 +37,16 @@ export const FRANQUEADO_VAZIO: FranqueadoInput = {
   logradouro: "",
   numero: "",
   complemento: "",
-  latitude: "",
-  longitude: "",
-  ie: "",
-  natureza_juridica: "",
-  capital_social: "",
-  inaugurada: "",
-  grupos: "",
-  data_inicio_implantacao: "",
-  data_fim_implantacao: "",
-  data_inauguracao: "",
-  data_criacao: "",
-  data_criacao_sistema: "",
-  data_inativacao: "",
-  tipo: "Loja Franqueada",
+  modalidade: "",
+  inicio_operacao: "",
+  fim_operacao: "",
   cpf_franqueado: "",
   status: "ativo",
 };
+
+export const MODALIDADES = ["H.O", "Store", "Migração", "Corporate"];
+
+export const TIPOS_CONTATO = ["E-mail", "Telefone", "Celular", "WhatsApp"];
 
 export const UF_LIST = [
   "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS",

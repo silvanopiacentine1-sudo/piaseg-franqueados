@@ -16,5 +16,3 @@ services:
     envVars:
       - key: DATA_DIR
         value: /data
-      - key: JWT_SECRET
-        sync: false

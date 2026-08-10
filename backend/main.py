@@ -7,13 +7,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
-from fastapi import Depends, FastAPI, HTTPException, Header
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from openpyxl import Workbook
 from pydantic import BaseModel
-
-import auth
 
 # Trava de segurança: no Render, DATA_DIR é obrigatório. Sem isso, o app
 # subiria normalmente gravando no filesystem efêmero do container e perderia
@@ -42,31 +40,23 @@ FRANQUEADOS_FILE = DATA_DIR / "franqueados.json"
 _BUNDLED_FRANQUEADOS_FILE = APP_DIR / "franqueados.json"
 
 BACKUPS_DIR = DATA_DIR / "backups"
-BACKUP_SOURCE_FILES = ["franqueados.json", "users.json"]
+BACKUP_SOURCE_FILES = ["franqueados.json"]
 MAX_BACKUPS = 30
 
+MODALIDADES = ["H.O", "Store", "Migração", "Corporate"]
+
 FIELDS = [
-    "nome_fantasia", "razao_social", "cnpj", "email", "telefone", "celular",
-    "cep", "uf", "municipio", "bairro", "logradouro", "numero", "complemento",
-    "latitude", "longitude", "ie", "natureza_juridica", "capital_social",
-    "inaugurada", "grupos", "data_inicio_implantacao", "data_fim_implantacao",
-    "data_inauguracao", "data_criacao", "data_criacao_sistema",
-    "data_inativacao", "tipo", "cpf_franqueado", "status",
+    "nome_fantasia", "razao_social", "cnpj", "cep", "uf", "municipio",
+    "bairro", "logradouro", "numero", "complemento", "modalidade",
+    "inicio_operacao", "fim_operacao", "cpf_franqueado", "status",
 ]
 
 EXPORT_HEADERS = {
     "id": "ID", "nome_fantasia": "Nome Fantasia", "razao_social": "Razão Social",
-    "cnpj": "CNPJ", "email": "Email", "telefone": "Telefone", "celular": "Celular",
-    "cep": "CEP", "uf": "UF", "municipio": "Município", "bairro": "Bairro",
-    "logradouro": "Logradouro", "numero": "Número", "complemento": "Complemento",
-    "latitude": "Latitude", "longitude": "Longitude", "ie": "IE",
-    "natureza_juridica": "Natureza Jurídica", "capital_social": "Capital Social",
-    "inaugurada": "Inaugurada", "grupos": "Grupos",
-    "data_inicio_implantacao": "Data Início Implantação",
-    "data_fim_implantacao": "Data Fim Implantação",
-    "data_inauguracao": "Data Inauguração", "data_criacao": "Data Criação",
-    "data_criacao_sistema": "Data Criação Sistema",
-    "data_inativacao": "Data Inativação", "tipo": "Tipo",
+    "cnpj": "CNPJ", "contatos": "Contatos", "cep": "CEP", "uf": "UF",
+    "municipio": "Município", "bairro": "Bairro", "logradouro": "Logradouro",
+    "numero": "Número", "complemento": "Complemento", "modalidade": "Modalidade",
+    "inicio_operacao": "Início da Operação", "fim_operacao": "Fim da Operação",
     "cpf_franqueado": "CPF do Franqueado", "status": "Status",
 }
 
@@ -107,28 +97,16 @@ def save_franqueados(items: list[dict]) -> None:
     FRANQUEADOS_FILE.write_text(json.dumps(items, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
-def get_current_user(authorization: Optional[str] = Header(None)) -> dict:
-    if not authorization or not authorization.startswith("Bearer "):
-        raise HTTPException(status_code=401, detail="Não autenticado")
-    token = authorization.removeprefix("Bearer ")
-    payload = auth.decode_token(token)
-    if not payload:
-        raise HTTPException(status_code=401, detail="Token inválido ou expirado")
-    return payload
-
-
-class LoginRequest(BaseModel):
-    username: str
-    password: str
+class Contato(BaseModel):
+    tipo: str = "E-mail"
+    valor: str = ""
 
 
 class FranqueadoIn(BaseModel):
     nome_fantasia: str = ""
     razao_social: str = ""
     cnpj: str = ""
-    email: str = ""
-    telefone: str = ""
-    celular: str = ""
+    contatos: list[Contato] = []
     cep: str = ""
     uf: str = ""
     municipio: str = ""
@@ -136,47 +114,11 @@ class FranqueadoIn(BaseModel):
     logradouro: str = ""
     numero: str = ""
     complemento: str = ""
-    latitude: str = ""
-    longitude: str = ""
-    ie: str = ""
-    natureza_juridica: str = ""
-    capital_social: str = ""
-    inaugurada: str = ""
-    grupos: str = ""
-    data_inicio_implantacao: str = ""
-    data_fim_implantacao: str = ""
-    data_inauguracao: str = ""
-    data_criacao: str = ""
-    data_criacao_sistema: str = ""
-    data_inativacao: str = ""
-    tipo: str = "Loja Franqueada"
+    modalidade: str = ""
+    inicio_operacao: str = ""
+    fim_operacao: str = ""
     cpf_franqueado: str = ""
     status: str = "ativo"
-
-
-class UserIn(BaseModel):
-    username: str
-    name: str
-    password: str
-
-
-class UserUpdateIn(BaseModel):
-    name: Optional[str] = None
-    password: Optional[str] = None
-
-
-@app.post("/auth/login")
-def login(body: LoginRequest):
-    user = auth.authenticate(body.username, body.password)
-    if not user:
-        raise HTTPException(status_code=401, detail="Usuário ou senha inválidos")
-    token = auth.create_token(user["username"], user["name"])
-    return {"token": token, "name": user["name"], "username": user["username"]}
-
-
-@app.get("/auth/me")
-def me(user: dict = Depends(get_current_user)):
-    return {"username": user["sub"], "name": user["name"]}
 
 
 @app.get("/franqueados")
@@ -184,27 +126,32 @@ def list_franqueados(
     q: Optional[str] = None,
     uf: Optional[str] = None,
     municipio: Optional[str] = None,
-    tipo: Optional[str] = None,
+    modalidade: Optional[str] = None,
     status: Optional[str] = None,
-    user: dict = Depends(get_current_user),
 ):
     items = load_franqueados()
     if q:
         needle = q.strip().lower()
-        items = [
-            f for f in items
-            if needle in (f.get("nome_fantasia") or "").lower()
-            or needle in (f.get("razao_social") or "").lower()
-            or needle in (f.get("cnpj") or "").lower()
-            or needle in (f.get("email") or "").lower()
-            or needle in (f.get("municipio") or "").lower()
-        ]
+        def matches(f):
+            if needle in (f.get("nome_fantasia") or "").lower():
+                return True
+            if needle in (f.get("razao_social") or "").lower():
+                return True
+            if needle in (f.get("cnpj") or "").lower():
+                return True
+            if needle in (f.get("municipio") or "").lower():
+                return True
+            for c in f.get("contatos") or []:
+                if needle in (c.get("valor") or "").lower():
+                    return True
+            return False
+        items = [f for f in items if matches(f)]
     if uf:
         items = [f for f in items if (f.get("uf") or "").upper() == uf.upper()]
     if municipio:
         items = [f for f in items if (f.get("municipio") or "").lower() == municipio.lower()]
-    if tipo:
-        items = [f for f in items if f.get("tipo") == tipo]
+    if modalidade:
+        items = [f for f in items if f.get("modalidade") == modalidade]
     if status:
         items = [f for f in items if f.get("status") == status]
     items = sorted(items, key=lambda f: (f.get("nome_fantasia") or "").lower())
@@ -212,14 +159,14 @@ def list_franqueados(
 
 
 @app.get("/franqueados/stats/uf")
-def stats_uf(user: dict = Depends(get_current_user)):
+def stats_uf():
     items = load_franqueados()
     counts = Counter((f.get("uf") or "—").upper() for f in items)
     return [{"uf": uf, "total": total} for uf, total in sorted(counts.items())]
 
 
 @app.get("/franqueados/stats/municipio")
-def stats_municipio(user: dict = Depends(get_current_user)):
+def stats_municipio():
     items = load_franqueados()
     grouped: dict[tuple[str, str], list[dict]] = {}
     for f in items:
@@ -241,15 +188,18 @@ def stats_municipio(user: dict = Depends(get_current_user)):
 
 
 @app.get("/franqueados/export")
-def export_franqueados(user: dict = Depends(get_current_user)):
+def export_franqueados():
     items = load_franqueados()
     wb = Workbook()
     ws = wb.active
     ws.title = "Franqueados"
     keys = ["id"] + FIELDS
-    ws.append([EXPORT_HEADERS.get(k, k) for k in keys])
+    headers = [EXPORT_HEADERS.get(k, k) for k in keys[:6]] + ["Contatos"] + [EXPORT_HEADERS.get(k, k) for k in keys[6:]]
+    ws.append(headers)
     for f in items:
-        ws.append([f.get(k, "") for k in keys])
+        contatos_str = "; ".join(f"{c.get('tipo')}: {c.get('valor')}" for c in f.get("contatos") or [])
+        row = [f.get(k, "") for k in keys[:6]] + [contatos_str] + [f.get(k, "") for k in keys[6:]]
+        ws.append(row)
     buffer = io.BytesIO()
     wb.save(buffer)
     buffer.seek(0)
@@ -262,7 +212,7 @@ def export_franqueados(user: dict = Depends(get_current_user)):
 
 
 @app.get("/franqueados/{franqueado_id}")
-def get_franqueado(franqueado_id: str, user: dict = Depends(get_current_user)):
+def get_franqueado(franqueado_id: str):
     items = load_franqueados()
     for f in items:
         if f["id"] == franqueado_id:
@@ -271,7 +221,7 @@ def get_franqueado(franqueado_id: str, user: dict = Depends(get_current_user)):
 
 
 @app.post("/franqueados", status_code=201)
-def create_franqueado(body: FranqueadoIn, user: dict = Depends(get_current_user)):
+def create_franqueado(body: FranqueadoIn):
     items = load_franqueados()
     existing_ids = [int(f["id"]) for f in items if str(f.get("id", "")).isdigit()]
     new_id = str(max(existing_ids) + 1) if existing_ids else "1"
@@ -282,7 +232,7 @@ def create_franqueado(body: FranqueadoIn, user: dict = Depends(get_current_user)
 
 
 @app.put("/franqueados/{franqueado_id}")
-def update_franqueado(franqueado_id: str, body: FranqueadoIn, user: dict = Depends(get_current_user)):
+def update_franqueado(franqueado_id: str, body: FranqueadoIn):
     items = load_franqueados()
     for i, f in enumerate(items):
         if f["id"] == franqueado_id:
@@ -293,7 +243,7 @@ def update_franqueado(franqueado_id: str, body: FranqueadoIn, user: dict = Depen
 
 
 @app.delete("/franqueados/{franqueado_id}", status_code=204)
-def delete_franqueado(franqueado_id: str, user: dict = Depends(get_current_user)):
+def delete_franqueado(franqueado_id: str):
     items = load_franqueados()
     filtered = [f for f in items if f["id"] != franqueado_id]
     if len(filtered) == len(items):
@@ -301,39 +251,8 @@ def delete_franqueado(franqueado_id: str, user: dict = Depends(get_current_user)
     save_franqueados(filtered)
 
 
-@app.get("/admin/users")
-def list_users(user: dict = Depends(get_current_user)):
-    return [{"username": u["username"], "name": u["name"]} for u in auth.load_users()]
-
-
-@app.post("/admin/users", status_code=201)
-def create_user(body: UserIn, user: dict = Depends(get_current_user)):
-    try:
-        return auth.create_user(body.username, body.name, body.password)
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
-@app.put("/admin/users/{username}")
-def update_user_endpoint(username: str, body: UserUpdateIn, user: dict = Depends(get_current_user)):
-    result = auth.update_user(username, name=body.name, password=body.password)
-    if not result:
-        raise HTTPException(status_code=404, detail="Usuário não encontrado")
-    return result
-
-
-@app.delete("/admin/users/{username}", status_code=204)
-def delete_user_endpoint(username: str, user: dict = Depends(get_current_user)):
-    try:
-        deleted = auth.delete_user(username)
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    if not deleted:
-        raise HTTPException(status_code=404, detail="Usuário não encontrado")
-
-
 @app.get("/admin/backups")
-def list_backups(user: dict = Depends(get_current_user)):
+def list_backups():
     if not BACKUPS_DIR.exists():
         return []
     snapshots = sorted((p.name for p in BACKUPS_DIR.iterdir() if p.is_dir()), reverse=True)
@@ -341,7 +260,7 @@ def list_backups(user: dict = Depends(get_current_user)):
 
 
 @app.post("/admin/backups/{name}/restore")
-def restore_backup(name: str, user: dict = Depends(get_current_user)):
+def restore_backup(name: str):
     source_dir = BACKUPS_DIR / name
     if not source_dir.exists():
         raise HTTPException(status_code=404, detail="Backup não encontrado")

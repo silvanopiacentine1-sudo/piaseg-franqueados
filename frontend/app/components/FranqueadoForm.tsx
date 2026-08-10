@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FranqueadoInput, UF_LIST } from "../lib/types";
+import { FranqueadoInput, MODALIDADES, TIPOS_CONTATO, UF_LIST } from "../lib/types";
 
 function Field({
   label,
@@ -52,8 +52,21 @@ export default function FranqueadoForm({
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
-  function set<K extends keyof FranqueadoInput>(key: K, value: string) {
+  function set<K extends keyof FranqueadoInput>(key: K, value: FranqueadoInput[K]) {
     setData((d) => ({ ...d, [key]: value }));
+  }
+
+  function addContato() {
+    set("contatos", [...data.contatos, { tipo: "E-mail", valor: "" }]);
+  }
+
+  function updateContato(index: number, field: "tipo" | "valor", value: string) {
+    const next = data.contatos.map((c, i) => (i === index ? { ...c, [field]: value } : c));
+    set("contatos", next);
+  }
+
+  function removeContato(index: number) {
+    set("contatos", data.contatos.filter((_, i) => i !== index));
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -76,14 +89,16 @@ export default function FranqueadoForm({
         <Field label="Razão Social" value={data.razao_social} onChange={(v) => set("razao_social", v)} />
         <Field label="CNPJ" value={data.cnpj} onChange={(v) => set("cnpj", v)} />
         <div>
-          <label className="block text-xs font-medium mb-1 text-black/60">Tipo</label>
+          <label className="block text-xs font-medium mb-1 text-black/60">Modalidade</label>
           <select
-            value={data.tipo}
-            onChange={(e) => set("tipo", e.target.value)}
+            value={data.modalidade}
+            onChange={(e) => set("modalidade", e.target.value)}
             className="w-full rounded-md border border-black/20 px-3 py-2 text-sm outline-none focus:border-[#c2a360]"
           >
-            <option value="Loja Franqueada">Loja Franqueada</option>
-            <option value="Unidade Própria">Unidade Própria</option>
+            <option value="">—</option>
+            {MODALIDADES.map((m) => (
+              <option key={m} value={m}>{m}</option>
+            ))}
           </select>
         </div>
         <div>
@@ -98,14 +113,57 @@ export default function FranqueadoForm({
           </select>
         </div>
         <Field label="CPF do Franqueado" value={data.cpf_franqueado} onChange={(v) => set("cpf_franqueado", v)} />
-        <Field label="Grupos" value={data.grupos} onChange={(v) => set("grupos", v)} />
       </Section>
 
-      <Section title="Contato">
-        <Field label="E-mail" value={data.email} onChange={(v) => set("email", v)} type="email" />
-        <Field label="Telefone" value={data.telefone} onChange={(v) => set("telefone", v)} />
-        <Field label="Celular" value={data.celular} onChange={(v) => set("celular", v)} />
-      </Section>
+      <div className="bg-white rounded-lg border border-black/10 p-5">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="font-heading text-base" style={{ color: "#072a3c" }}>Contatos</h2>
+          <button
+            type="button"
+            onClick={addContato}
+            className="rounded-md px-3 py-1.5 text-sm font-semibold text-white"
+            style={{ background: "#072a3c" }}
+          >
+            + Contato
+          </button>
+        </div>
+        <div className="flex flex-col gap-3">
+          {data.contatos.map((c, i) => (
+            <div key={i} className="flex gap-3 items-end">
+              <div className="w-40">
+                <label className="block text-xs font-medium mb-1 text-black/60">Tipo</label>
+                <select
+                  value={c.tipo}
+                  onChange={(e) => updateContato(i, "tipo", e.target.value)}
+                  className="w-full rounded-md border border-black/20 px-3 py-2 text-sm outline-none focus:border-[#c2a360]"
+                >
+                  {TIPOS_CONTATO.map((t) => (
+                    <option key={t} value={t}>{t}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex-1">
+                <label className="block text-xs font-medium mb-1 text-black/60">Valor</label>
+                <input
+                  value={c.valor}
+                  onChange={(e) => updateContato(i, "valor", e.target.value)}
+                  className="w-full rounded-md border border-black/20 px-3 py-2 text-sm outline-none focus:border-[#c2a360]"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={() => removeContato(i)}
+                className="text-red-600 hover:underline text-sm px-2 py-2"
+              >
+                Remover
+              </button>
+            </div>
+          ))}
+          {data.contatos.length === 0 && (
+            <p className="text-sm text-black/50">Nenhum contato adicionado.</p>
+          )}
+        </div>
+      </div>
 
       <Section title="Endereço">
         <Field label="CEP" value={data.cep} onChange={(v) => set("cep", v)} />
@@ -127,23 +185,11 @@ export default function FranqueadoForm({
         <Field label="Logradouro" value={data.logradouro} onChange={(v) => set("logradouro", v)} />
         <Field label="Número" value={data.numero} onChange={(v) => set("numero", v)} />
         <Field label="Complemento" value={data.complemento} onChange={(v) => set("complemento", v)} />
-        <Field label="Latitude" value={data.latitude} onChange={(v) => set("latitude", v)} />
-        <Field label="Longitude" value={data.longitude} onChange={(v) => set("longitude", v)} />
-      </Section>
-
-      <Section title="Dados Societários">
-        <Field label="IE" value={data.ie} onChange={(v) => set("ie", v)} />
-        <Field label="Natureza Jurídica" value={data.natureza_juridica} onChange={(v) => set("natureza_juridica", v)} />
-        <Field label="Capital Social" value={data.capital_social} onChange={(v) => set("capital_social", v)} />
       </Section>
 
       <Section title="Datas">
-        <Field label="Início Implantação" value={data.data_inicio_implantacao} onChange={(v) => set("data_inicio_implantacao", v)} />
-        <Field label="Fim Implantação" value={data.data_fim_implantacao} onChange={(v) => set("data_fim_implantacao", v)} />
-        <Field label="Inauguração" value={data.data_inauguracao} onChange={(v) => set("data_inauguracao", v)} />
-        <Field label="Criação" value={data.data_criacao} onChange={(v) => set("data_criacao", v)} />
-        <Field label="Criação Sistema" value={data.data_criacao_sistema} onChange={(v) => set("data_criacao_sistema", v)} />
-        <Field label="Inativação" value={data.data_inativacao} onChange={(v) => set("data_inativacao", v)} />
+        <Field label="Início da Operação" value={data.inicio_operacao} onChange={(v) => set("inicio_operacao", v)} />
+        <Field label="Fim da Operação" value={data.fim_operacao} onChange={(v) => set("fim_operacao", v)} />
       </Section>
 
       {error && <p className="text-red-600 text-sm">{error}</p>}

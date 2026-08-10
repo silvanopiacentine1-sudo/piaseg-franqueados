@@ -2,11 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import Header from "../components/Header";
 import BrMap from "../components/BrMap";
 import { apiJson } from "../lib/api";
-import { getToken } from "../lib/auth";
 import { Franqueado } from "../lib/types";
 
 interface UfStat {
@@ -29,21 +27,15 @@ function interpolateColor(a: string, b: string, t: number) {
 }
 
 export default function MapaPage() {
-  const router = useRouter();
   const [stats, setStats] = useState<UfStat[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
   const [selectedItems, setSelectedItems] = useState<Franqueado[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!getToken()) {
-      router.replace("/");
-      return;
-    }
     apiJson<UfStat[]>("/franqueados/stats/uf")
       .then(setStats)
       .finally(() => setLoading(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const counts = useMemo(() => {

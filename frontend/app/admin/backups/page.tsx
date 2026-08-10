@@ -1,10 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Header from "../../components/Header";
 import { apiJson } from "../../lib/api";
-import { getToken } from "../../lib/auth";
 
 function formatTimestamp(name: string): string {
   const match = name.match(/^(\d{8})-(\d{6})$/);
@@ -16,16 +14,11 @@ function formatTimestamp(name: string): string {
 }
 
 export default function BackupsPage() {
-  const router = useRouter();
   const [backups, setBackups] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [restoring, setRestoring] = useState("");
 
   useEffect(() => {
-    if (!getToken()) {
-      router.replace("/");
-      return;
-    }
     load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

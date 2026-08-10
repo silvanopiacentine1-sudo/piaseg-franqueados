@@ -2,10 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import Header from "../components/Header";
 import { apiJson } from "../lib/api";
-import { getToken } from "../lib/auth";
 
 interface CidadeStat {
   uf: string;
@@ -15,20 +13,14 @@ interface CidadeStat {
 }
 
 export default function CidadesPage() {
-  const router = useRouter();
   const [stats, setStats] = useState<CidadeStat[]>([]);
   const [loading, setLoading] = useState(true);
   const [q, setQ] = useState("");
 
   useEffect(() => {
-    if (!getToken()) {
-      router.replace("/");
-      return;
-    }
     apiJson<CidadeStat[]>("/franqueados/stats/municipio")
       .then(setStats)
       .finally(() => setLoading(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const filtered = useMemo(() => {

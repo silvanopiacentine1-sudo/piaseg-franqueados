@@ -5,7 +5,6 @@ import { useParams, useRouter } from "next/navigation";
 import Header from "../../components/Header";
 import FranqueadoForm from "../../components/FranqueadoForm";
 import { apiJson } from "../../lib/api";
-import { getToken } from "../../lib/auth";
 import { Franqueado, FranqueadoInput } from "../../lib/types";
 
 export default function FranqueadoDetalhePage() {
@@ -16,14 +15,9 @@ export default function FranqueadoDetalhePage() {
   const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
-    if (!getToken()) {
-      router.replace("/");
-      return;
-    }
     apiJson<Franqueado>(`/franqueados/${params.id}`)
       .then(setFranqueado)
       .catch((err) => setError(err instanceof Error ? err.message : "Erro ao carregar"));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
 
   async function handleSubmit(data: FranqueadoInput) {
@@ -52,7 +46,14 @@ export default function FranqueadoDetalhePage() {
       <main className="max-w-6xl w-full mx-auto px-4 py-6 flex-1">
         <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
           <h1 className="font-heading text-2xl" style={{ color: "#072a3c" }}>
-            {franqueado ? franqueado.nome_fantasia || "Franqueado" : "Carregando..."}
+            {franqueado ? (
+              <>
+                {franqueado.nome_fantasia || "Franqueado"}{" "}
+                <span className="text-base font-sans text-black/50">Nº {franqueado.id}</span>
+              </>
+            ) : (
+              "Carregando..."
+            )}
           </h1>
           {franqueado && (
             <button
