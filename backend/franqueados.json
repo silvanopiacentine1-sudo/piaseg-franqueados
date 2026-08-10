@@ -49,10 +49,7 @@
     "fim_operacao": "",
     "cpf_franqueado": "6",
     "status": "ativo",
-    "sistemas_contratados": [
-      "E-mail",
-      "Sistema Financeiro"
-    ]
+    "sistemas_contratados": []
   },
   {
     "id": "3",
