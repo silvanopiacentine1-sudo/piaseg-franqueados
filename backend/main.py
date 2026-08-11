@@ -124,6 +124,9 @@ def _migrate_franqueados() -> None:
             if "funcao" not in c:
                 c["funcao"] = ""
                 changed = True
+            if "data_nascimento" not in c:
+                c["data_nascimento"] = ""
+                changed = True
     if changed:
         save_franqueados(items)
 
@@ -136,6 +139,7 @@ class Contato(BaseModel):
     telefone: str = ""
     email: str = ""
     funcao: str = ""
+    data_nascimento: str = ""
 
 
 class FranqueadoIn(BaseModel):
@@ -227,6 +231,114 @@ def stats_municipio():
         for (uf, municipio), group in grouped.items()
     ]
     return sorted(result, key=lambda x: x["municipio"].lower())
+
+
+MESES_PT = [
+    "", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro",
+]
+
+
+def _build_aniversarios() -> list[dict]:
+    items = load_franqueados()
+    result = []
+    for f in items:
+        for c in f.get("contatos") or []:
+            dn = c.get("data_nascimento")
+            if not dn:
+                continue
+            try:
+                dt = datetime.strptime(dn, "%Y-%m-%d")
+            except ValueError:
+                continue
+            result.append({
+                "franqueado_id": f["id"],
+                "franqueado_nome": f.get("nome_fantasia", ""),
+                "contato_nome": c.get("nome") or "Contato",
+                "funcao": c.get("funcao", ""),
+                "telefone": c.get("telefone", ""),
+                "email": c.get("email", ""),
+                "data_nascimento": dn,
+                "dia": dt.day,
+                "mes": dt.month,
+            })
+    result.sort(key=lambda x: (x["mes"], x["dia"]))
+    return result
+
+
+@app.get("/franqueados/aniversarios")
+def list_aniversarios():
+    return _build_aniversarios()
+
+
+@app.get("/franqueados/aniversarios/export")
+def export_aniversarios():
+    data = _build_aniversarios()
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Aniversários"
+    ws.append(["Data", "Mês", "Nome do Contato", "Função", "Franqueado", "Telefone", "E-mail"])
+    for a in data:
+        ws.append([
+            f"{a['dia']:02d}/{a['mes']:02d}",
+            MESES_PT[a["mes"]],
+            a["contato_nome"],
+            a["funcao"],
+            a["franqueado_nome"],
+            a["telefone"],
+            a["email"],
+        ])
+    buffer = io.BytesIO()
+    wb.save(buffer)
+    buffer.seek(0)
+    filename = f"aniversarios_{datetime.now().strftime('%Y%m%d')}.xlsx"
+    return StreamingResponse(
+        buffer,
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
+
+
+@app.get("/franqueados/aniversarios/export-pdf")
+def export_aniversarios_pdf():
+    from reportlab.lib import colors
+    from reportlab.lib.pagesizes import A4, landscape
+    from reportlab.lib.styles import ParagraphStyle
+    from reportlab.platypus import Paragraph, SimpleDocTemplate, Table, TableStyle
+
+    data = _build_aniversarios()
+    cell_style = ParagraphStyle(name="cell", fontSize=9, leading=11)
+    header_style = ParagraphStyle(name="header", fontSize=9.5, leading=12, textColor=colors.white, fontName="Helvetica-Bold")
+
+    headers = ["Data", "Mês", "Nome do Contato", "Função", "Franqueado", "Telefone", "E-mail"]
+    table_data = [[Paragraph(h, header_style) for h in headers]]
+    for a in data:
+        row = [
+            f"{a['dia']:02d}/{a['mes']:02d}", MESES_PT[a["mes"]], a["contato_nome"],
+            a["funcao"], a["franqueado_nome"], a["telefone"], a["email"],
+        ]
+        table_data.append([Paragraph(str(v), cell_style) for v in row])
+
+    buffer = io.BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=landscape(A4), leftMargin=25, rightMargin=25, topMargin=25, bottomMargin=25)
+    weights = [0.6, 0.9, 1.4, 1.0, 1.6, 1.0, 1.6]
+    usable_width = landscape(A4)[0] - 50
+    col_widths = [usable_width * w / sum(weights) for w in weights]
+    table = Table(table_data, colWidths=col_widths, repeatRows=1)
+    table.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#072a3c")),
+        ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#cccccc")),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#f6f6f6")]),
+    ]))
+    doc.build([table])
+    buffer.seek(0)
+    filename = f"aniversarios_{datetime.now().strftime('%Y%m%d')}.pdf"
+    return StreamingResponse(
+        buffer,
+        media_type="application/pdf",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
 
 
 def _build_export_table() -> tuple[list[str], list[list[str]]]:

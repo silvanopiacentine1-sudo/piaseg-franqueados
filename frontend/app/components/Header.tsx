@@ -27,6 +27,7 @@ export default function Header() {
           <NavLink href="/franqueados">Franqueados</NavLink>
           <NavLink href="/mapa">Mapa</NavLink>
           <NavLink href="/cidades">Por Cidade</NavLink>
+          <NavLink href="/aniversarios">Aniversários</NavLink>
           <NavLink href="/admin/backups">Backups</NavLink>
         </nav>
       </div>

@@ -3,6 +3,7 @@ export interface Contato {
   telefone: string;
   email: string;
   funcao: string;
+  data_nascimento: string;
 }
 
 export interface Franqueado {

@@ -57,10 +57,10 @@ export default function FranqueadoForm({
   }
 
   function addContato() {
-    set("contatos", [...data.contatos, { nome: "", telefone: "", email: "", funcao: "" }]);
+    set("contatos", [...data.contatos, { nome: "", telefone: "", email: "", funcao: "", data_nascimento: "" }]);
   }
 
-  function updateContato(index: number, field: "nome" | "telefone" | "email" | "funcao", value: string) {
+  function updateContato(index: number, field: "nome" | "telefone" | "email" | "funcao" | "data_nascimento", value: string) {
     const next = data.contatos.map((c, i) => (i === index ? { ...c, [field]: value } : c));
     set("contatos", next);
   }
@@ -139,7 +139,7 @@ export default function FranqueadoForm({
         </div>
         <div className="flex flex-col gap-4">
           {data.contatos.map((c, i) => (
-            <div key={i} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-end border border-black/10 rounded-md p-3">
+            <div key={i} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 items-end border border-black/10 rounded-md p-3">
               <div>
                 <label className="block text-xs font-medium mb-1 text-black/60">Nome</label>
                 <input
@@ -160,6 +160,15 @@ export default function FranqueadoForm({
                     <option key={f} value={f}>{f}</option>
                   ))}
                 </select>
+              </div>
+              <div>
+                <label className="block text-xs font-medium mb-1 text-black/60">Data de Nascimento</label>
+                <input
+                  type="date"
+                  value={c.data_nascimento}
+                  onChange={(e) => updateContato(i, "data_nascimento", e.target.value)}
+                  className="w-full rounded-md border border-black/20 px-3 py-2 text-sm outline-none focus:border-[#c2a360]"
+                />
               </div>
               <div>
                 <label className="block text-xs font-medium mb-1 text-black/60">Telefone</label>
