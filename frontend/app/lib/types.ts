@@ -2,6 +2,7 @@ export interface Contato {
   nome: string;
   telefone: string;
   email: string;
+  funcao: string;
 }
 
 export interface Franqueado {
@@ -23,6 +24,7 @@ export interface Franqueado {
   cpf_franqueado: string;
   status: string;
   sistemas_contratados: string[];
+  observacao: string;
 }
 
 export type FranqueadoInput = Omit<Franqueado, "id">;
@@ -45,11 +47,14 @@ export const FRANQUEADO_VAZIO: FranqueadoInput = {
   cpf_franqueado: "",
   status: "ativo",
   sistemas_contratados: [],
+  observacao: "",
 };
 
 export const MODALIDADES = ["H.O", "Store", "Migração", "Corporate"];
 
 export const SISTEMAS = ["E-mail", "Contador", "Sistema Financeiro"];
+
+export const FUNCOES_CONTATO = ["Sócio", "Colaborador", "Parceiro"];
 
 export const UF_LIST = [
   "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS",

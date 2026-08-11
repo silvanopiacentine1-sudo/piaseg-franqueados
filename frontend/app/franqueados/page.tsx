@@ -16,6 +16,7 @@ export default function FranqueadosPage() {
   const [uf, setUf] = useState("");
   const [status, setStatus] = useState("");
   const [exporting, setExporting] = useState(false);
+  const [exportingPdf, setExportingPdf] = useState(false);
 
   useEffect(() => {
     load();
@@ -55,6 +56,17 @@ export default function FranqueadosPage() {
     }
   }
 
+  async function handleExportPdf() {
+    setExportingPdf(true);
+    try {
+      await downloadFile("/franqueados/export-pdf", `franqueados_${new Date().toISOString().slice(0, 10)}.pdf`);
+    } catch (err) {
+      alert(err instanceof Error ? err.message : "Erro ao exportar PDF");
+    } finally {
+      setExportingPdf(false);
+    }
+  }
+
   function primeiroContato(f: Franqueado) {
     return f.contatos && f.contatos.length > 0 ? f.contatos[0] : null;
   }
@@ -74,6 +86,13 @@ export default function FranqueadosPage() {
               className="rounded-md px-4 py-2 text-sm font-semibold border border-[#072a3c] text-[#072a3c] hover:bg-[#072a3c]/5 disabled:opacity-60"
             >
               {exporting ? "Exportando..." : "⬇ Exportar Excel"}
+            </button>
+            <button
+              onClick={handleExportPdf}
+              disabled={exportingPdf}
+              className="rounded-md px-4 py-2 text-sm font-semibold border border-[#072a3c] text-[#072a3c] hover:bg-[#072a3c]/5 disabled:opacity-60"
+            >
+              {exportingPdf ? "Exportando..." : "⬇ PDF"}
             </button>
             <Link
               href="/franqueados/novo"

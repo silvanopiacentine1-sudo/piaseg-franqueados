@@ -47,11 +47,13 @@ MODALIDADES = ["H.O", "Store", "Migração", "Corporate"]
 
 SISTEMAS = ["E-mail", "Contador", "Sistema Financeiro"]
 
+FUNCOES_CONTATO = ["Sócio", "Colaborador", "Parceiro"]
+
 FIELDS = [
     "nome_fantasia", "razao_social", "cnpj", "cep", "uf", "municipio",
     "bairro", "logradouro", "numero", "complemento", "modalidade",
     "inicio_operacao", "fim_operacao", "cpf_franqueado", "status",
-    "sistemas_contratados",
+    "sistemas_contratados", "observacao",
 ]
 
 EXPORT_HEADERS = {
@@ -61,7 +63,7 @@ EXPORT_HEADERS = {
     "numero": "Número", "complemento": "Complemento", "modalidade": "Modalidade",
     "inicio_operacao": "Início da Operação", "fim_operacao": "Fim da Operação",
     "cpf_franqueado": "CPF do Franqueado", "status": "Status",
-    "sistemas_contratados": "Sistemas Contratados",
+    "sistemas_contratados": "Sistemas Contratados", "observacao": "Observação",
 }
 
 
@@ -105,6 +107,7 @@ class Contato(BaseModel):
     nome: str = ""
     telefone: str = ""
     email: str = ""
+    funcao: str = ""
 
 
 class FranqueadoIn(BaseModel):
@@ -125,6 +128,7 @@ class FranqueadoIn(BaseModel):
     cpf_franqueado: str = ""
     status: str = "ativo"
     sistemas_contratados: list[str] = []
+    observacao: str = ""
 
 
 @app.get("/franqueados")
@@ -197,24 +201,36 @@ def stats_municipio():
     return sorted(result, key=lambda x: x["municipio"].lower())
 
 
+def _build_export_table() -> tuple[list[str], list[list[str]]]:
+    items = load_franqueados()
+    keys = ["id"] + FIELDS
+    headers = [EXPORT_HEADERS.get(k, k) for k in keys[:6]] + ["Contatos"] + [EXPORT_HEADERS.get(k, k) for k in keys[6:]]
+    rows = []
+    for f in items:
+        contato_parts = []
+        for c in f.get("contatos") or []:
+            nome = c.get("nome") or "Contato"
+            funcao = c.get("funcao")
+            label = f"{nome} ({funcao})" if funcao else nome
+            valores = f"{c.get('telefone') or ''} {c.get('email') or ''}".strip()
+            contato_parts.append(f"{label}: {valores}")
+        contatos_str = "; ".join(contato_parts)
+        def cell_value(k):
+            v = f.get(k, "")
+            return ", ".join(v) if isinstance(v, list) else str(v)
+        row = [cell_value(k) for k in keys[:6]] + [contatos_str] + [cell_value(k) for k in keys[6:]]
+        rows.append(row)
+    return headers, rows
+
+
 @app.get("/franqueados/export")
 def export_franqueados():
-    items = load_franqueados()
+    headers, rows = _build_export_table()
     wb = Workbook()
     ws = wb.active
     ws.title = "Franqueados"
-    keys = ["id"] + FIELDS
-    headers = [EXPORT_HEADERS.get(k, k) for k in keys[:6]] + ["Contatos"] + [EXPORT_HEADERS.get(k, k) for k in keys[6:]]
     ws.append(headers)
-    for f in items:
-        contatos_str = "; ".join(
-            f"{c.get('nome') or 'Contato'}: {c.get('telefone') or ''} {c.get('email') or ''}".strip()
-            for c in f.get("contatos") or []
-        )
-        def cell_value(k):
-            v = f.get(k, "")
-            return ", ".join(v) if isinstance(v, list) else v
-        row = [cell_value(k) for k in keys[:6]] + [contatos_str] + [cell_value(k) for k in keys[6:]]
+    for row in rows:
         ws.append(row)
     buffer = io.BytesIO()
     wb.save(buffer)
@@ -223,6 +239,58 @@ def export_franqueados():
     return StreamingResponse(
         buffer,
         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
+
+
+@app.get("/franqueados/export-pdf")
+def export_franqueados_pdf():
+    from reportlab.lib import colors
+    from reportlab.lib.styles import ParagraphStyle
+    from reportlab.lib.units import mm
+    from reportlab.platypus import Paragraph, SimpleDocTemplate, Table, TableStyle
+
+    headers, rows = _build_export_table()
+    cell_style = ParagraphStyle(name="cell", fontSize=6, leading=7)
+    header_style = ParagraphStyle(name="header", fontSize=6.5, leading=8, textColor=colors.white, fontName="Helvetica-Bold")
+
+    table_data = [[Paragraph(h, header_style) for h in headers]]
+    for row in rows:
+        table_data.append([Paragraph(str(v), cell_style) for v in row])
+
+    # Pesos relativos por coluna: colunas com texto mais longo (nome, contatos,
+    # endereço) recebem mais espaço que colunas curtas (ID, número, status).
+    COLUMN_WEIGHTS = {
+        "ID": 0.4, "Nome Fantasia": 1.6, "Razão Social": 1.6, "CNPJ": 1.0,
+        "Contatos": 2.2, "CEP": 0.7, "UF": 0.4, "Município": 1.0, "Bairro": 1.1,
+        "Logradouro": 1.6, "Número": 0.5, "Complemento": 0.9, "Modalidade": 0.7,
+        "Início da Operação": 0.9, "Fim da Operação": 0.9, "CPF do Franqueado": 0.9,
+        "Status": 0.6, "Sistemas Contratados": 1.3, "Observação": 1.6,
+    }
+    weights = [COLUMN_WEIGHTS.get(h, 1.0) for h in headers]
+
+    buffer = io.BytesIO()
+    doc = SimpleDocTemplate(
+        buffer,
+        pagesize=(1700, 900),
+        leftMargin=15, rightMargin=15, topMargin=15, bottomMargin=15,
+    )
+    usable_width = 1700 - 30
+    total_weight = sum(weights)
+    col_widths = [usable_width * w / total_weight for w in weights]
+    table = Table(table_data, colWidths=col_widths, repeatRows=1)
+    table.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#072a3c")),
+        ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#cccccc")),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#f6f6f6")]),
+    ]))
+    doc.build([table])
+    buffer.seek(0)
+    filename = f"franqueados_{datetime.now().strftime('%Y%m%d')}.pdf"
+    return StreamingResponse(
+        buffer,
+        media_type="application/pdf",
         headers={"Content-Disposition": f'attachment; filename="{filename}"'},
     )
 

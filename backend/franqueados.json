@@ -8,7 +8,8 @@
       {
         "nome": "",
         "telefone": "65999225486",
-        "email": "rafael_alencar_@hotmail.com"
+        "email": "rafael_alencar_@hotmail.com",
+        "funcao": ""
       }
     ],
     "cep": "78300001",
@@ -23,7 +24,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "2",
@@ -34,7 +36,8 @@
       {
         "nome": "",
         "telefone": "67996640879",
-        "email": "alexandre.amorim@piaseg.com.br"
+        "email": "alexandre.amorim@piaseg.com.br",
+        "funcao": ""
       }
     ],
     "cep": "79821026",
@@ -49,7 +52,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "6",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "3",
@@ -60,7 +64,8 @@
       {
         "nome": "",
         "telefone": "67999953356",
-        "email": "brunolgirotto@agenergia.com.br"
+        "email": "brunolgirotto@agenergia.com.br",
+        "funcao": ""
       }
     ],
     "cep": "79800024",
@@ -75,7 +80,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "2510895176",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "4",
@@ -86,7 +92,8 @@
       {
         "nome": "",
         "telefone": "67981369297",
-        "email": "energiasolar.sistema.escritorio@gmail.com"
+        "email": "energiasolar.sistema.escritorio@gmail.com",
+        "funcao": ""
       }
     ],
     "cep": "79833605",
@@ -101,7 +108,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "29208165",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "5",
@@ -112,7 +120,8 @@
       {
         "nome": "",
         "telefone": "67999879424",
-        "email": "cambarasegurosenegocios@gmail.com"
+        "email": "cambarasegurosenegocios@gmail.com",
+        "funcao": ""
       }
     ],
     "cep": "79290000",
@@ -127,7 +136,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "119198096",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "6",
@@ -138,7 +148,8 @@
       {
         "nome": "",
         "telefone": "14996073202",
-        "email": "celsocarloscavallierijunior@gmail.com"
+        "email": "celsocarloscavallierijunior@gmail.com",
+        "funcao": ""
       }
     ],
     "cep": "17258252",
@@ -153,7 +164,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "33165153809",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "7",
@@ -164,7 +176,8 @@
       {
         "nome": "",
         "telefone": "12996834385",
-        "email": "diogobonfim@gmail.com"
+        "email": "diogobonfim@gmail.com",
+        "funcao": ""
       }
     ],
     "cep": "03015010",
@@ -179,7 +192,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "36581535800",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "8",
@@ -190,7 +204,8 @@
       {
         "nome": "",
         "telefone": "24998365821",
-        "email": "fabianaseg2024@gmail.com"
+        "email": "fabianaseg2024@gmail.com",
+        "funcao": ""
       }
     ],
     "cep": "27516240",
@@ -205,7 +220,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "12588194737",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "9",
@@ -216,7 +232,8 @@
       {
         "nome": "",
         "telefone": "63984128048",
-        "email": "piasegsegurostocantins@gmail.com"
+        "email": "piasegsegurostocantins@gmail.com",
+        "funcao": ""
       }
     ],
     "cep": "77022492",
@@ -231,7 +248,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "2513809122",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "10",
@@ -242,7 +260,8 @@
       {
         "nome": "",
         "telefone": "27999270264",
-        "email": "ilsongomesh@hotmail.com"
+        "email": "ilsongomesh@hotmail.com",
+        "funcao": ""
       }
     ],
     "cep": "29105390",
@@ -257,7 +276,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "9",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "11",
@@ -268,7 +288,8 @@
       {
         "nome": "",
         "telefone": "67992400792",
-        "email": "carolinamorales_02@hotmail.com"
+        "email": "carolinamorales_02@hotmail.com",
+        "funcao": ""
       }
     ],
     "cep": "79804030",
@@ -283,7 +304,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "70787530115",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "12",
@@ -294,7 +316,8 @@
       {
         "nome": "",
         "telefone": "67996634866",
-        "email": "jimmydourados@gmail.com"
+        "email": "jimmydourados@gmail.com",
+        "funcao": ""
       }
     ],
     "cep": "79800025",
@@ -309,7 +332,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "1782634193",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "13",
@@ -320,7 +344,8 @@
       {
         "nome": "",
         "telefone": "67999545363",
-        "email": "joaoa.boeira@hotmail.com"
+        "email": "joaoa.boeira@hotmail.com",
+        "funcao": ""
       }
     ],
     "cep": "79920027",
@@ -335,7 +360,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "3549269188",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "14",
@@ -346,7 +372,8 @@
       {
         "nome": "",
         "telefone": "67999962851",
-        "email": "infinitysegg@hotmail.com"
+        "email": "infinitysegg@hotmail.com",
+        "funcao": ""
       }
     ],
     "cep": "79824060",
@@ -361,7 +388,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "98588052172",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "15",
@@ -372,7 +400,8 @@
       {
         "nome": "",
         "telefone": "45999204153",
-        "email": "fortezsolucoesfinanceiras@gmail.com"
+        "email": "fortezsolucoesfinanceiras@gmail.com",
+        "funcao": ""
       }
     ],
     "cep": "85819710",
@@ -387,7 +416,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "8",
     "status": "inativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "16",
@@ -398,7 +428,8 @@
       {
         "nome": "",
         "telefone": "11973334301",
-        "email": "lucasjikal777@gmail.com"
+        "email": "lucasjikal777@gmail.com",
+        "funcao": ""
       }
     ],
     "cep": "01123050",
@@ -413,7 +444,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "12729844864",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "17",
@@ -424,7 +456,8 @@
       {
         "nome": "",
         "telefone": "64981244240",
-        "email": "marvsegquiri@hotmail.com"
+        "email": "marvsegquiri@hotmail.com",
+        "funcao": ""
       }
     ],
     "cep": "75862124",
@@ -439,7 +472,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "89006968153",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "18",
@@ -450,7 +484,8 @@
       {
         "nome": "",
         "telefone": "67998351583",
-        "email": "mauriciocg@piaseg.com.br"
+        "email": "mauriciocg@piaseg.com.br",
+        "funcao": ""
       }
     ],
     "cep": "79823732",
@@ -465,7 +500,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "1896793959",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "19",
@@ -476,7 +512,8 @@
       {
         "nome": "",
         "telefone": "67998134070",
-        "email": "fernandoscfilho2008@gmail.com"
+        "email": "fernandoscfilho2008@gmail.com",
+        "funcao": ""
       }
     ],
     "cep": "79011190",
@@ -491,7 +528,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "3",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "20",
@@ -502,7 +540,8 @@
       {
         "nome": "",
         "telefone": "31984968023",
-        "email": "renata.amoroso@piaseg.com.br"
+        "email": "renata.amoroso@piaseg.com.br",
+        "funcao": ""
       }
     ],
     "cep": "30330360",
@@ -517,7 +556,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "58472860663",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "21",
@@ -528,7 +568,8 @@
       {
         "nome": "",
         "telefone": "61986526372",
-        "email": "souvencer50@gmail.com"
+        "email": "souvencer50@gmail.com",
+        "funcao": ""
       }
     ],
     "cep": "70765100",
@@ -543,7 +584,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "4",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "22",
@@ -554,7 +596,8 @@
       {
         "nome": "",
         "telefone": "67996839558",
-        "email": "scheilacreinisch@gmail.com"
+        "email": "scheilacreinisch@gmail.com",
+        "funcao": ""
       }
     ],
     "cep": "79841090",
@@ -569,7 +612,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "542177170",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "23",
@@ -580,7 +624,8 @@
       {
         "nome": "",
         "telefone": "67996685508",
-        "email": "gestaoveiculos@rodomaior.com.br"
+        "email": "gestaoveiculos@rodomaior.com.br",
+        "funcao": ""
       }
     ],
     "cep": "79046200",
@@ -595,7 +640,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "33629412904",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "24",
@@ -606,7 +652,8 @@
       {
         "nome": "",
         "telefone": "67999120609",
-        "email": "thiago@piaseg.com.br"
+        "email": "thiago@piaseg.com.br",
+        "funcao": ""
       }
     ],
     "cep": "79011535",
@@ -621,7 +668,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "1422026140",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "25",
@@ -632,7 +680,8 @@
       {
         "nome": "",
         "telefone": "11988464025",
-        "email": "contato@piasegcampinas.com.br"
+        "email": "contato@piasegcampinas.com.br",
+        "funcao": ""
       }
     ],
     "cep": "13070033",
@@ -647,7 +696,8 @@
     "fim_operacao": "12/01/2026",
     "cpf_franqueado": "2",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "26",
@@ -658,7 +708,8 @@
       {
         "nome": "",
         "telefone": "67999039554",
-        "email": "daywid.wst@hotmail.com"
+        "email": "daywid.wst@hotmail.com",
+        "funcao": ""
       }
     ],
     "cep": "79890000",
@@ -673,7 +724,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "4416599188",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "27",
@@ -684,7 +736,8 @@
       {
         "nome": "",
         "telefone": "6799720727",
-        "email": "leandrol.alencar@gmail.com"
+        "email": "leandrol.alencar@gmail.com",
+        "funcao": ""
       }
     ],
     "cep": "79813270",
@@ -699,7 +752,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "7",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "28",
@@ -710,7 +764,8 @@
       {
         "nome": "",
         "telefone": "",
-        "email": "sueli.pereira@piaseg.com.br"
+        "email": "sueli.pereira@piaseg.com.br",
+        "funcao": ""
       }
     ],
     "cep": "79825090",
@@ -725,7 +780,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "29",
@@ -736,7 +792,8 @@
       {
         "nome": "",
         "telefone": "48999728275",
-        "email": "sonimarmachado@gmail.com.br"
+        "email": "sonimarmachado@gmail.com.br",
+        "funcao": ""
       }
     ],
     "cep": "88049326",
@@ -751,7 +808,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "613982762",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "30",
@@ -762,7 +820,8 @@
       {
         "nome": "",
         "telefone": "54996161748",
-        "email": "eliara.rodrigues@piaseg.com.br"
+        "email": "eliara.rodrigues@piaseg.com.br",
+        "funcao": ""
       }
     ],
     "cep": "99360000",
@@ -777,7 +836,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "852677081",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "31",
@@ -788,7 +848,8 @@
       {
         "nome": "",
         "telefone": "67999202952",
-        "email": "ricardo.portela@piaseg.com.br"
+        "email": "ricardo.portela@piaseg.com.br",
+        "funcao": ""
       }
     ],
     "cep": "79902698",
@@ -803,7 +864,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "4513263504",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "32",
@@ -814,7 +876,8 @@
       {
         "nome": "",
         "telefone": "42999810258",
-        "email": "claudia.moura@piaseg.com.br"
+        "email": "claudia.moura@piaseg.com.br",
+        "funcao": ""
       }
     ],
     "cep": "84010320",
@@ -829,7 +892,8 @@
     "fim_operacao": "",
     "cpf_franqueado": "6407042984",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   },
   {
     "id": "33",
@@ -840,7 +904,8 @@
       {
         "nome": "",
         "telefone": "41998517845",
-        "email": "julio.sartorelli@piaseg.com.br"
+        "email": "julio.sartorelli@piaseg.com.br",
+        "funcao": ""
       }
     ],
     "cep": "81220010",
@@ -855,6 +920,7 @@
     "fim_operacao": "",
     "cpf_franqueado": "",
     "status": "ativo",
-    "sistemas_contratados": []
+    "sistemas_contratados": [],
+    "observacao": ""
   }
 ]

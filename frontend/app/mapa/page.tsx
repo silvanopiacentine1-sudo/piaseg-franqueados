@@ -70,7 +70,7 @@ export default function MapaPage() {
       <Header />
       <main className="max-w-6xl w-full mx-auto px-4 py-6 flex-1">
         <h1 className="font-heading text-2xl mb-4" style={{ color: "#072a3c" }}>
-          Franqueados por Estado
+          Franqueados por Estado <span className="text-base font-sans text-black/50">({stats.length} estados)</span>
         </h1>
 
         {loading ? (

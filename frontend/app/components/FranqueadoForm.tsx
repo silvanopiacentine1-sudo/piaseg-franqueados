@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FranqueadoInput, MODALIDADES, SISTEMAS, UF_LIST } from "../lib/types";
+import { FranqueadoInput, FUNCOES_CONTATO, MODALIDADES, SISTEMAS, UF_LIST } from "../lib/types";
 
 function Field({
   label,
@@ -57,10 +57,10 @@ export default function FranqueadoForm({
   }
 
   function addContato() {
-    set("contatos", [...data.contatos, { nome: "", telefone: "", email: "" }]);
+    set("contatos", [...data.contatos, { nome: "", telefone: "", email: "", funcao: "" }]);
   }
 
-  function updateContato(index: number, field: "nome" | "telefone" | "email", value: string) {
+  function updateContato(index: number, field: "nome" | "telefone" | "email" | "funcao", value: string) {
     const next = data.contatos.map((c, i) => (i === index ? { ...c, [field]: value } : c));
     set("contatos", next);
   }
@@ -139,7 +139,7 @@ export default function FranqueadoForm({
         </div>
         <div className="flex flex-col gap-4">
           {data.contatos.map((c, i) => (
-            <div key={i} className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end border border-black/10 rounded-md p-3">
+            <div key={i} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-end border border-black/10 rounded-md p-3">
               <div>
                 <label className="block text-xs font-medium mb-1 text-black/60">Nome</label>
                 <input
@@ -147,6 +147,19 @@ export default function FranqueadoForm({
                   onChange={(e) => updateContato(i, "nome", e.target.value)}
                   className="w-full rounded-md border border-black/20 px-3 py-2 text-sm outline-none focus:border-[#c2a360]"
                 />
+              </div>
+              <div>
+                <label className="block text-xs font-medium mb-1 text-black/60">Função</label>
+                <select
+                  value={c.funcao}
+                  onChange={(e) => updateContato(i, "funcao", e.target.value)}
+                  className="w-full rounded-md border border-black/20 px-3 py-2 text-sm outline-none focus:border-[#c2a360]"
+                >
+                  <option value="">—</option>
+                  {FUNCOES_CONTATO.map((f) => (
+                    <option key={f} value={f}>{f}</option>
+                  ))}
+                </select>
               </div>
               <div>
                 <label className="block text-xs font-medium mb-1 text-black/60">Telefone</label>
@@ -224,6 +237,17 @@ export default function FranqueadoForm({
             </label>
           ))}
         </div>
+      </div>
+
+      <div className="bg-white rounded-lg border border-black/10 p-5">
+        <h2 className="font-heading text-base mb-4" style={{ color: "#072a3c" }}>Observação</h2>
+        <textarea
+          value={data.observacao}
+          onChange={(e) => set("observacao", e.target.value)}
+          rows={4}
+          placeholder="Informações livres sobre este franqueado..."
+          className="w-full rounded-md border border-black/20 px-3 py-2 text-sm outline-none focus:border-[#c2a360] resize-y"
+        />
       </div>
 
       {error && <p className="text-red-600 text-sm">{error}</p>}
