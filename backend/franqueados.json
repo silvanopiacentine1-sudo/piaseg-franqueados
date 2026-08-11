@@ -415,7 +415,7 @@
     "inicio_operacao": "08/12/2025",
     "fim_operacao": "",
     "cpf_franqueado": "8",
-    "status": "inativo",
+    "status": "ativo",
     "sistemas_contratados": [],
     "observacao": ""
   },
@@ -751,34 +751,6 @@
     "inicio_operacao": "23/08/2023",
     "fim_operacao": "",
     "cpf_franqueado": "7",
-    "status": "ativo",
-    "sistemas_contratados": [],
-    "observacao": ""
-  },
-  {
-    "id": "28",
-    "nome_fantasia": "TREINAMENTO",
-    "razao_social": "PIASEG - PIASEG",
-    "cnpj": "99999999999999",
-    "contatos": [
-      {
-        "nome": "",
-        "telefone": "",
-        "email": "sueli.pereira@piaseg.com.br",
-        "funcao": ""
-      }
-    ],
-    "cep": "79825090",
-    "uf": "MS",
-    "municipio": "Dourados",
-    "bairro": "Vila Progresso",
-    "logradouro": "Rua Presidente Vargas",
-    "numero": "1235",
-    "complemento": "",
-    "modalidade": "",
-    "inicio_operacao": "",
-    "fim_operacao": "",
-    "cpf_franqueado": "",
     "status": "ativo",
     "sistemas_contratados": [],
     "observacao": ""

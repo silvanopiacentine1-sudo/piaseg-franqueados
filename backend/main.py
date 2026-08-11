@@ -103,6 +103,34 @@ def save_franqueados(items: list[dict]) -> None:
     FRANQUEADOS_FILE.write_text(json.dumps(items, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
+def _migrate_franqueados() -> None:
+    """Preenche campos novos com default em registros antigos, sem nunca
+    sobrescrever ou apagar dados existentes (só adiciona chaves ausentes).
+
+    Roda em todo startup — ao contrário de um "reseed"/restore, isto NUNCA
+    substitui o arquivo inteiro, então edições reais feitas via UI entre
+    deploys (criar, editar, excluir franqueados) são sempre preservadas.
+    """
+    items = load_franqueados()
+    changed = not FRANQUEADOS_FILE.exists()
+    for f in items:
+        if "sistemas_contratados" not in f:
+            f["sistemas_contratados"] = []
+            changed = True
+        if "observacao" not in f:
+            f["observacao"] = ""
+            changed = True
+        for c in f.get("contatos") or []:
+            if "funcao" not in c:
+                c["funcao"] = ""
+                changed = True
+    if changed:
+        save_franqueados(items)
+
+
+_migrate_franqueados()
+
+
 class Contato(BaseModel):
     nome: str = ""
     telefone: str = ""
@@ -354,20 +382,6 @@ def restore_backup(name: str):
         if source.exists():
             shutil.copy2(source, DATA_DIR / filename)
     return {"restored": name}
-
-
-@app.post("/admin/reseed")
-def reseed():
-    """Força releitura do franqueados.json versionado no repositório,
-    sobrescrevendo os dados atuais em DATA_DIR (com backup de segurança
-    antes). Uso raro: só quando o disco persistente ficou com dados
-    desatualizados/divergentes do que está no código.
-    """
-    if not _BUNDLED_FRANQUEADOS_FILE.exists():
-        raise HTTPException(status_code=500, detail="Arquivo de seed não encontrado")
-    _run_startup_backup()
-    shutil.copy2(_BUNDLED_FRANQUEADOS_FILE, FRANQUEADOS_FILE)
-    return {"reseeded": True, "total": len(load_franqueados())}
 
 
 @app.get("/health")
