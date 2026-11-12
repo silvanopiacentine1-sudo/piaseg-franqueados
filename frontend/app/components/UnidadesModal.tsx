@@ -190,6 +190,16 @@ export default function UnidadesModal({
                 <Input label="Logradouro" value={draft.logradouro} onChange={(v) => set("logradouro", v)} />
                 <Input label="Número" value={draft.numero} onChange={(v) => set("numero", v)} />
                 <Input label="Complemento" value={draft.complemento} onChange={(v) => set("complemento", v)} />
+                <div className="sm:col-span-2 lg:col-span-3">
+                  <label className="block text-xs font-medium mb-1 text-black/60">Observação</label>
+                  <textarea
+                    value={draft.observacao}
+                    onChange={(e) => set("observacao", e.target.value)}
+                    rows={3}
+                    placeholder="Informações diversas sobre esta unidade..."
+                    className={inputCls + " resize-y"}
+                  />
+                </div>
               </div>
               {erro && <p className="text-red-600 text-sm mt-3">{erro}</p>}
               <div className="flex gap-3 mt-5">

@@ -163,6 +163,7 @@ class Unidade(BaseModel):
     email: str = ""
     inicio_operacao: str = ""
     status: str = "ativo"
+    observacao: str = ""
 
 
 class FranqueadoIn(BaseModel):

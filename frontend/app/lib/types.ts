@@ -20,6 +20,7 @@ export interface Unidade {
   email: string;
   inicio_operacao: string;
   status: string;
+  observacao: string;
 }
 
 export const UNIDADE_VAZIA: Unidade = {
@@ -36,6 +37,7 @@ export const UNIDADE_VAZIA: Unidade = {
   email: "",
   inicio_operacao: "",
   status: "ativo",
+  observacao: "",
 };
 
 export interface Franqueado {
