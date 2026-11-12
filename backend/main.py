@@ -53,7 +53,7 @@ FIELDS = [
     "nome_fantasia", "razao_social", "cnpj", "cep", "uf", "municipio",
     "bairro", "logradouro", "numero", "complemento", "modalidade",
     "inicio_operacao", "fim_operacao", "cpf_franqueado", "status",
-    "sistemas_contratados", "observacao",
+    "sistemas_contratados", "observacao", "multi_franqueado",
 ]
 
 EXPORT_HEADERS = {
@@ -64,6 +64,7 @@ EXPORT_HEADERS = {
     "inicio_operacao": "Início da Operação", "fim_operacao": "Fim da Operação",
     "cpf_franqueado": "CPF do Franqueado", "status": "Status",
     "sistemas_contratados": "Sistemas Contratados", "observacao": "Observação",
+    "multi_franqueado": "Multi Franqueado",
 }
 
 
@@ -120,6 +121,12 @@ def _migrate_franqueados() -> None:
         if "observacao" not in f:
             f["observacao"] = ""
             changed = True
+        if "multi_franqueado" not in f:
+            f["multi_franqueado"] = "nao"
+            changed = True
+        if "unidades" not in f:
+            f["unidades"] = []
+            changed = True
         for c in f.get("contatos") or []:
             if "funcao" not in c:
                 c["funcao"] = ""
@@ -142,6 +149,22 @@ class Contato(BaseModel):
     data_nascimento: str = ""
 
 
+class Unidade(BaseModel):
+    nome: str = ""
+    cnpj: str = ""
+    cep: str = ""
+    uf: str = ""
+    municipio: str = ""
+    bairro: str = ""
+    logradouro: str = ""
+    numero: str = ""
+    complemento: str = ""
+    telefone: str = ""
+    email: str = ""
+    inicio_operacao: str = ""
+    status: str = "ativo"
+
+
 class FranqueadoIn(BaseModel):
     nome_fantasia: str = ""
     razao_social: str = ""
@@ -161,6 +184,8 @@ class FranqueadoIn(BaseModel):
     status: str = "ativo"
     sistemas_contratados: list[str] = []
     observacao: str = ""
+    multi_franqueado: str = "nao"
+    unidades: list[Unidade] = []
 
 
 @app.get("/franqueados")
@@ -344,7 +369,10 @@ def export_aniversarios_pdf():
 def _build_export_table() -> tuple[list[str], list[list[str]]]:
     items = load_franqueados()
     keys = ["id"] + FIELDS
-    headers = [EXPORT_HEADERS.get(k, k) for k in keys[:6]] + ["Contatos"] + [EXPORT_HEADERS.get(k, k) for k in keys[6:]]
+    headers = (
+        [EXPORT_HEADERS.get(k, k) for k in keys[:6]] + ["Contatos"]
+        + [EXPORT_HEADERS.get(k, k) for k in keys[6:]] + ["Unidades Vinculadas"]
+    )
     rows = []
     for f in items:
         contato_parts = []
@@ -355,10 +383,21 @@ def _build_export_table() -> tuple[list[str], list[list[str]]]:
             valores = f"{c.get('telefone') or ''} {c.get('email') or ''}".strip()
             contato_parts.append(f"{label}: {valores}")
         contatos_str = "; ".join(contato_parts)
+        unidade_parts = []
+        for u in f.get("unidades") or []:
+            local = "/".join(x for x in [u.get("municipio"), u.get("uf")] if x)
+            extra = " - ".join(x for x in [u.get("cnpj"), local] if x)
+            unidade_parts.append(f"{u.get('nome') or 'Unidade'}" + (f" ({extra})" if extra else ""))
+        unidades_str = "; ".join(unidade_parts)
         def cell_value(k):
             v = f.get(k, "")
+            if k == "multi_franqueado":
+                return "Sim" if v == "sim" else "Não"
             return ", ".join(v) if isinstance(v, list) else str(v)
-        row = [cell_value(k) for k in keys[:6]] + [contatos_str] + [cell_value(k) for k in keys[6:]]
+        row = (
+            [cell_value(k) for k in keys[:6]] + [contatos_str]
+            + [cell_value(k) for k in keys[6:]] + [unidades_str]
+        )
         rows.append(row)
     return headers, rows
 
@@ -406,6 +445,7 @@ def export_franqueados_pdf():
         "Logradouro": 1.6, "Número": 0.5, "Complemento": 0.9, "Modalidade": 0.7,
         "Início da Operação": 0.9, "Fim da Operação": 0.9, "CPF do Franqueado": 0.9,
         "Status": 0.6, "Sistemas Contratados": 1.3, "Observação": 1.6,
+        "Multi Franqueado": 0.6, "Unidades Vinculadas": 2.0,
     }
     weights = [COLUMN_WEIGHTS.get(h, 1.0) for h in headers]
 

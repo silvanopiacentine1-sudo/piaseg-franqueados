@@ -6,6 +6,38 @@ export interface Contato {
   data_nascimento: string;
 }
 
+export interface Unidade {
+  nome: string;
+  cnpj: string;
+  cep: string;
+  uf: string;
+  municipio: string;
+  bairro: string;
+  logradouro: string;
+  numero: string;
+  complemento: string;
+  telefone: string;
+  email: string;
+  inicio_operacao: string;
+  status: string;
+}
+
+export const UNIDADE_VAZIA: Unidade = {
+  nome: "",
+  cnpj: "",
+  cep: "",
+  uf: "",
+  municipio: "",
+  bairro: "",
+  logradouro: "",
+  numero: "",
+  complemento: "",
+  telefone: "",
+  email: "",
+  inicio_operacao: "",
+  status: "ativo",
+};
+
 export interface Franqueado {
   id: string;
   nome_fantasia: string;
@@ -26,6 +58,8 @@ export interface Franqueado {
   status: string;
   sistemas_contratados: string[];
   observacao: string;
+  multi_franqueado: string;
+  unidades: Unidade[];
 }
 
 export type FranqueadoInput = Omit<Franqueado, "id">;
@@ -49,6 +83,8 @@ export const FRANQUEADO_VAZIO: FranqueadoInput = {
   status: "ativo",
   sistemas_contratados: [],
   observacao: "",
+  multi_franqueado: "nao",
+  unidades: [],
 };
 
 export const MODALIDADES = ["H.O", "Store", "Migração", "Corporate"];

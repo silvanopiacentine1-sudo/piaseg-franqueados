@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FranqueadoInput, FUNCOES_CONTATO, MODALIDADES, SISTEMAS, UF_LIST } from "../lib/types";
+import UnidadesModal from "./UnidadesModal";
 
 function Field({
   label,
@@ -48,7 +49,12 @@ export default function FranqueadoForm({
   onSubmit: (data: FranqueadoInput) => Promise<void>;
   submitLabel: string;
 }) {
-  const [data, setData] = useState<FranqueadoInput>(initial);
+  const [data, setData] = useState<FranqueadoInput>({
+    ...initial,
+    multi_franqueado: initial.multi_franqueado || "nao",
+    unidades: initial.unidades || [],
+  });
+  const [showUnidades, setShowUnidades] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
@@ -77,6 +83,21 @@ export default function FranqueadoForm({
         ? data.sistemas_contratados.filter((s) => s !== sistema)
         : [...data.sistemas_contratados, sistema]
     );
+  }
+
+  function setMulti(value: "sim" | "nao") {
+    if (value === "sim") {
+      set("multi_franqueado", "sim");
+      setShowUnidades(true);
+      return;
+    }
+    if (data.unidades.length > 0) {
+      const ok = confirm(
+        `Este franqueado tem ${data.unidades.length} unidade(s) vinculada(s). Marcar "Não" vai remover essas unidades ao salvar. Continuar?`
+      );
+      if (!ok) return;
+    }
+    setData((d) => ({ ...d, multi_franqueado: "nao", unidades: [] }));
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -123,7 +144,49 @@ export default function FranqueadoForm({
           </select>
         </div>
         <Field label="CPF do Franqueado" value={data.cpf_franqueado} onChange={(v) => set("cpf_franqueado", v)} />
+        <div>
+          <label className="block text-xs font-medium mb-1 text-black/60">Multi Franqueado</label>
+          <div className="flex gap-2">
+            {(["sim", "nao"] as const).map((v) => {
+              const active = data.multi_franqueado === v;
+              return (
+                <button
+                  key={v}
+                  type="button"
+                  onClick={() => setMulti(v)}
+                  className="flex-1 rounded-md px-3 py-2 text-sm font-semibold border transition-colors"
+                  style={
+                    active
+                      ? { background: "#072a3c", borderColor: "#072a3c", color: "white" }
+                      : { background: "white", borderColor: "rgba(0,0,0,0.2)", color: "rgba(0,0,0,0.7)" }
+                  }
+                >
+                  {v === "sim" ? "Sim" : "Não"}
+                </button>
+              );
+            })}
+          </div>
+          {data.multi_franqueado === "sim" && (
+            <button
+              type="button"
+              onClick={() => setShowUnidades(true)}
+              className="mt-2 text-sm font-semibold hover:underline"
+              style={{ color: "#a88a48" }}
+            >
+              Unidades vinculadas ({data.unidades.length}) →
+            </button>
+          )}
+        </div>
       </Section>
+
+      {showUnidades && (
+        <UnidadesModal
+          franqueadoNome={data.nome_fantasia}
+          unidades={data.unidades}
+          onChange={(next) => set("unidades", next)}
+          onClose={() => setShowUnidades(false)}
+        />
+      )}
 
       <div className="bg-white rounded-lg border border-black/10 p-5">
         <div className="flex items-center justify-between mb-4">
